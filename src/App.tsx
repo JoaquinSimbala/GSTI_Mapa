@@ -127,13 +127,13 @@ const FlowCanvas: React.FC = () => {
 
         // Center on the branch root
         const branchRootId =
-          branchId === 'fundamentos'
-            ? 'branch-fundamentos'
-            : branchId === 'pdca'
-            ? 'branch-pdca'
-            : branchId === 'servicedesk'
-            ? 'branch-servicedesk'
-            : 'branch-seguridad';
+          branchId === 'valor'
+            ? 'branch-valor'
+            : branchId === 'svs'
+            ? 'branch-svs'
+            : branchId === 'principios'
+            ? 'branch-principios'
+            : 'branch-practica';
         const targetNode = nodes.find((n) => n.id === branchRootId);
         if (targetNode) {
           reactFlow.setCenter(targetNode.position.x + 160, targetNode.position.y + 100, {
@@ -227,13 +227,13 @@ const FlowCanvas: React.FC = () => {
             switch (data.branch) {
               case 'central':
                 return '#4f46e5';
-              case 'fundamentos':
+              case 'valor':
                 return '#059669';
-              case 'pdca':
-                return '#d97706';
-              case 'servicedesk':
+              case 'svs':
                 return '#2563eb';
-              case 'seguridad':
+              case 'principios':
+                return '#d97706';
+              case 'practica':
                 return '#7c3aed';
               default:
                 return '#94a3b8';
@@ -255,24 +255,24 @@ const FlowCanvas: React.FC = () => {
           <div className="bottom-legend-card">
             <div className="legend-items">
               <span className="legend-item">
-                <span className="legend-dot" style={{ background: '#4f46e5' }} /> Núcleo Central
+                <span className="legend-dot" style={{ background: '#4f46e5' }} /> Núcleo SVS
               </span>
               <span className="legend-item">
-                <span className="legend-dot" style={{ background: '#059669' }} /> 1. Fundamentos
+                <span className="legend-dot" style={{ background: '#059669' }} /> 1. Arquetipos de Valor
               </span>
               <span className="legend-item">
-                <span className="legend-dot" style={{ background: '#d97706' }} /> 2. Ciclo PDCA
+                <span className="legend-dot" style={{ background: '#2563eb' }} /> 2. Componentes SVS
               </span>
               <span className="legend-item">
-                <span className="legend-dot" style={{ background: '#2563eb' }} /> 3. Service Desk
+                <span className="legend-dot" style={{ background: '#d97706' }} /> 3. 7 Principios ITIL
               </span>
               <span className="legend-item">
-                <span className="legend-dot" style={{ background: '#7c3aed' }} /> 4. Ciberseguridad
+                <span className="legend-dot" style={{ background: '#7c3aed' }} /> 4. Casos Prácticos UTP
               </span>
             </div>
             <span className="legend-divider">|</span>
             <span className="legend-hint">
-              💡 Haz clic en cualquier cuadro para desplegar su información detallada
+              💡 Haz clic en cualquier concepto para desplegar el análisis completo y simulador
             </span>
           </div>
         </Panel>

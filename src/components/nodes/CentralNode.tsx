@@ -62,7 +62,7 @@ export const CentralNode: React.FC<NodeProps> = memo(({ data, selected }) => {
             fontWeight: 600
           }}
         >
-          UTP Semana 9
+          UTP Semana 11
         </span>
       </div>
 

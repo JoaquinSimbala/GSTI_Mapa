@@ -3,14 +3,20 @@ import { NodeDetailData } from '../data/mapData';
 import { IconRenderer } from './IconHelper';
 import {
   X,
-  Sparkles,
   BookOpen,
   Sliders,
   CheckCircle,
-  Shield,
+  AlertTriangle,
+  Target,
+  Database,
   Layers,
-  RotateCw,
-  Target
+  Sparkles,
+  Compass,
+  FileSpreadsheet,
+  Globe,
+  Zap,
+  CheckCircle2,
+  Workflow
 } from 'lucide-react';
 
 interface SidebarDrawerProps {
@@ -22,26 +28,36 @@ interface SidebarDrawerProps {
 export const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ selectedDetail, onClose }) => {
   const [activeTab, setActiveTab] = useState<'teoria' | 'interactivo'>('teoria');
 
-  // Interactive PDCA Step State
-  const [pdcaActiveStep, setPdcaActiveStep] = useState<number>(0);
+  // Interactive Value Simulator States
+  const [utilityChecks, setUtilityChecks] = useState<Record<string, boolean>>({
+    reqs: true,
+    speed: true,
+    unblock: true
+  });
+  const [warrantyChecks, setWarrantyChecks] = useState<Record<string, boolean>>({
+    avail: true,
+    capac: true,
+    sec: true,
+    cont: true
+  });
 
-  // Interactive Cyber Incident Step
-  const [resolvedIncidentSteps, setResolvedIncidentSteps] = useState<Record<number, boolean>>({});
+  // Interactive 7 Principles Selector
+  const [selectedPrincipleIndex, setSelectedPrincipleIndex] = useState<number>(0);
 
-  // Interactive 7 Layers Active Layer
-  const [selectedLayerIndex, setSelectedLayerIndex] = useState<number>(0);
+  // Interactive Database Explorer
+  const [selectedDbIndex, setSelectedDbIndex] = useState<number>(0);
 
   if (!selectedDetail) return null;
 
   const getBranchColor = (branch: string) => {
     switch (branch) {
-      case 'fundamentos':
+      case 'valor':
         return '#059669';
-      case 'pdca':
-        return '#d97706';
-      case 'servicedesk':
+      case 'svs':
         return '#2563eb';
-      case 'seguridad':
+      case 'principios':
+        return '#d97706';
+      case 'practica':
         return '#7c3aed';
       default:
         return '#4f46e5';
@@ -50,31 +66,128 @@ export const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ selectedDetail, on
 
   const branchColor = getBranchColor(selectedDetail.branch);
 
-  const layersList = [
-    { num: '01', name: 'Capa Física', desc: 'Control de acceso a cuartos de servidores, CCTV, biometría, cerraduras electrónicas.', threat: 'Intrusión física, robo de discos duros o servidores.' },
-    { num: '02', name: 'Capa de Red', desc: 'Segmentación de VLANs, firewalls internos, mitigación anti-DDoS, switches gestionados.', threat: 'Sniffing de paquetes, movimientos laterales maliciosos.' },
-    { num: '03', name: 'Capa de Perímetro', desc: 'Gateways de seguridad, Web Application Firewalls (WAF), proxies inversos y DMZ.', threat: 'Ataques externos masivos, escaneos de puertos y bots.' },
-    { num: '04', name: 'Capa de Aplicación', desc: 'Desarrollo seguro (OWASP Top 10), autenticación multifactor (MFA), parches al día.', threat: 'Inyección SQL, Cross-Site Scripting (XSS), APIs expuestas.' },
-    { num: '05', name: 'Capa de Dispositivo (Endpoint)', desc: 'Antivirus EDR corporativo, cifrado BitLocker, control de dispositivos USB.', threat: 'Ransomware en computadoras de usuarios, memorias infectadas.' },
-    { num: '06', name: 'Capa de Datos', desc: 'Cifrado de datos en reposo y tránsito (TLS/AES), backups inmutables, políticas DLP.', threat: 'Exfiltración de información confidencial y bases de datos.' },
-    { num: '07', name: 'Capa Humana', desc: 'Capacitación constante, simulacros de phishing, cultura de reporte rápido de incidentes.', threat: 'Ingeniería social, phishing, contraseñas débiles compartidas.' }
+  const utilityCount = Object.values(utilityChecks).filter(Boolean).length;
+  const warrantyCount = Object.values(warrantyChecks).filter(Boolean).length;
+  const hasFullUtility = utilityCount >= 2;
+  const hasFullWarranty = warrantyCount >= 3;
+  const isValueCreated = hasFullUtility && hasFullWarranty;
+
+  const principlesList = [
+    {
+      num: 1,
+      name: 'Centrarse en el valor',
+      subtitle: 'Focus on Value',
+      prop: 'Vincular cada tarea, feature y reunión directamente al valor percibido por el cliente y las partes interesadas.',
+      webApp: 'Priorizar módulos que resuelvan la necesidad primaria del usuario (ej. transacciones sin fricción).',
+      error: 'Invertir meses en código o diseño estético que nadie utilizará o que no impacta en negocio.',
+      afinidad: 'Customer Experience / Product Owner en Scrum'
+    },
+    {
+      num: 2,
+      name: 'Comenzar donde se está',
+      subtitle: 'Start Where You Are',
+      prop: 'Evaluar objetivamente la situación actual (Situation-Problem-Solution) y reutilizar lo que ya funciona.',
+      webApp: 'Auditar bases de datos legadas y APIs existentes antes de proponer reconstruir todo desde cero.',
+      error: 'Descartar sistemas existentes por moda sin medir métricas reales de rendimiento.',
+      afinidad: 'Auditoría Técnica / Evaluación de Deuda Técnica'
+    },
+    {
+      num: 3,
+      name: 'Progresar iterativamente con retroalimentación',
+      subtitle: 'Progress Iteratively With Feedback',
+      prop: 'Dividir iniciativas complejas en etapas pequeñas para recopilar feedback continuo y mitigar riesgos.',
+      webApp: 'Lanzar un MVP web en Sprints de 2 semanas con Scrum para validar la base de datos con usuarios reales.',
+      error: 'Proyectos monolíticos estilo cascada de 1 año que se desfasan de la realidad al salir a producción.',
+      afinidad: 'Scrum (Sprints, Daily, Retrospectives) / Ciclo PDCA'
+    },
+    {
+      num: 4,
+      name: 'Colaborar y promover la visibilidad',
+      subtitle: 'Collaborate and Promote Visibility',
+      prop: 'Romper silos organizacionales, trabajar en equipos multidisciplinarios y transparentar el trabajo.',
+      webApp: 'Flujos transparentes con tableros Kanban, ramas Git claras (Master, Develop, Feature) y demos continuas.',
+      error: 'Aislar al equipo de base de datos del equipo frontend, generando cuellos de botella y culpas mutuas.',
+      afinidad: 'Cultura DevOps / Scrum Team multidisciplinario'
+    },
+    {
+      num: 5,
+      name: 'Pensar y trabajar de forma holística',
+      subtitle: 'Think and Work Holistically',
+      prop: 'Integrar las 4 dimensiones de ITIL (Personas, Procesos, Tecnología, Socios) para garantizar flujos E2E.',
+      webApp: 'Coordinar el frontend web con la capacidad del servidor, políticas de seguridad y capacitación a usuarios.',
+      error: 'Optimizar una consulta SQL descuidando la experiencia de usuario o la infraestructura de red.',
+      afinidad: 'Arquitectura Empresarial / Flujos BPMN'
+    },
+    {
+      num: 6,
+      name: 'Mantenerlo simple y práctico',
+      subtitle: 'Keep It Simple and Practical',
+      prop: 'Eliminar pasos redundantes, burocracia y métricas que no aporten valor directo (Filosofía Lean IT).',
+      webApp: 'Formularios web con el mínimo de clics necesarios y esquemas de base de datos limpios y normalizados.',
+      error: 'Crear flujos burocráticos con 5 niveles de aprobación para autorizar un cambio menor en web.',
+      afinidad: 'Lean IT / Principio KISS (Keep It Simple)'
+    },
+    {
+      num: 7,
+      name: 'Optimizar y automatizar',
+      subtitle: 'Optimize and Automate',
+      prop: 'Estandarizar y simplificar los procesos antes de aplicar herramientas de automatización tecnológica.',
+      webApp: 'Optimizar índices en la base de datos antes de automatizar pipelines de despliegue continuo (CI/CD).',
+      error: 'Automatizar procesos rotos o desorganizados: "automatizar el caos solo produce caos a alta velocidad".',
+      afinidad: 'CI/CD Pipelines / RPA / Infrastructure as Code'
+    }
   ];
 
-  const incidentStepsList = [
-    { step: 1, title: 'Identificación y Primeras Acciones', action: 'Mantener la calma, registrar la hora y aislar de inmediato los equipos afectados de la red (desconectar cable/WiFi).' },
-    { step: 2, title: 'Contención Rápida', action: 'Reforzar perímetros, revocar sesiones y forzar cambio de credenciales de administradores y cuentas de dominio.' },
-    { step: 3, title: 'Investigación y Forense', action: 'Preservar volcados de memoria y logs de auditoría para identificar vector y amenaza sin alterar la evidencia.' },
-    { step: 4, title: 'Informar a la Dirección', action: 'Emitir reporte ejecutivo con estimación de impacto en negocio y plan de recuperación en marcha.' },
-    { step: 5, title: 'Acciones Legales y Notificación', action: 'Notificar formalmente a autoridades competentes y policía cibernética con evidencia preservada.' },
-    { step: 6, title: 'Lecciones Aprendidas', action: 'Reunir al equipo multidisciplinario, cerrar brechas detectadas y programar simulacros preventivos.' }
+  const dbList = [
+    {
+      type: 'SQL Relacional',
+      examples: 'MySQL, MS SQL Server, PostgreSQL',
+      fit: 'Transacciones bancarias, matrículas, control financiero y consistencia ACID estricta.',
+      value: 'Garantiza consistencia absoluta de datos e integridad referencial en sistemas críticos.'
+    },
+    {
+      type: 'In-Memory Database',
+      examples: 'Redis, SAP HANA, MemSQL',
+      fit: 'Caché de sesiones web de alta concurrencia, tablas de clasificación y analítica en tiempo real.',
+      value: 'Latencia sub-milisegundo que dispara la velocidad percibida (Utilidad y Garantía).'
+    },
+    {
+      type: 'Vector Database',
+      examples: 'Pinecone, Milvus, Weaviate, Qdrant',
+      fit: 'Búsquedas semánticas con Inteligencia Artificial, chatbots RAG y sistemas de recomendación.',
+      value: 'Permite entregar servicios cognitivos modernos transformando texto/imágenes en embeddings.'
+    },
+    {
+      type: 'Document Database',
+      examples: 'MongoDB, Couchbase',
+      fit: 'Catálogos de productos, expedientes de estudiantes y perfiles con esquemas dinámicos.',
+      value: 'Agilidad extrema para iterar features sin migraciones rígidas de esquemas en desarrollo web.'
+    },
+    {
+      type: 'Time-Series Database',
+      examples: 'InfluxDB, TimescaleDB',
+      fit: 'Telemetría de servidores, métricas de APIs en tiempo real y sensores IoT.',
+      value: 'Monitoreo proactivo de la Garantía de servicio para prevenir caídas antes de que afecten al usuario.'
+    },
+    {
+      type: 'Columnar Database',
+      examples: 'Amazon Redshift, Apache Cassandra',
+      fit: 'Analítica de Big Data, data warehouses y procesamiento analítico en línea (OLAP).',
+      value: 'Permite a la alta dirección tomar decisiones estratégicas basadas en grandes volúmenes de datos.'
+    },
+    {
+      type: 'Graph Database',
+      examples: 'Neo4j, Azure Cosmos DB',
+      fit: 'Redes sociales, grafos de conocimiento y detección de fraude en pagos.',
+      value: 'Consulta relaciones complejas entre entidades a velocidades imposibles para motores tradicionales.'
+    },
+    {
+      type: 'NewSQL Database',
+      examples: 'Google Spanner, CockroachDB',
+      fit: 'Sistemas globales en la nube con distribución planetaria sin perder consistencia ACID.',
+      value: 'Escalabilidad horizontal ilimitada manteniendo máxima certidumbre transaccional.'
+    }
   ];
-
-  const handleStepCheckbox = (stepNum: number) => {
-    setResolvedIncidentSteps((prev) => ({
-      ...prev,
-      [stepNum]: !prev[stepNum]
-    }));
-  };
 
   return (
     <div
@@ -202,7 +315,7 @@ export const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ selectedDetail, on
             }}
           >
             <BookOpen size={13} />
-            Fundamentos
+            Fundamentos & Teoría
           </button>
 
           <button
@@ -225,7 +338,7 @@ export const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ selectedDetail, on
             }}
           >
             <Sliders size={13} />
-            Guía / Dinámica
+            Simulador & Casos
           </button>
         </div>
       </div>
@@ -249,10 +362,50 @@ export const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ selectedDetail, on
               <div style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>
                 Descripción Detallada
               </div>
-              <p style={{ fontSize: '13px', color: '#1e293b', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
+              <p style={{ fontSize: '13px', color: '#1e293b', lineHeight: 1.6, margin: 0, fontWeight: 500, whiteSpace: 'pre-line' }}>
                 {selectedDetail.fullDesc}
               </p>
             </div>
+
+            {selectedDetail.metricsOrFormula && (
+              <div
+                style={{
+                  background: '#f8fafc',
+                  border: `1.5px solid ${branchColor}40`,
+                  borderRadius: '12px',
+                  padding: '14px 16px'
+                }}
+              >
+                <div style={{ fontSize: '11.5px', fontWeight: 800, color: branchColor, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>
+                  {selectedDetail.metricsOrFormula.label}
+                </div>
+                {selectedDetail.metricsOrFormula.formula && (
+                  <div
+                    style={{
+                      background: '#ffffff',
+                      padding: '10px 12px',
+                      borderRadius: '8px',
+                      border: '1px solid #e2e8f0',
+                      fontSize: '13px',
+                      fontWeight: 700,
+                      color: branchColor,
+                      fontFamily: 'monospace',
+                      marginBottom: 10,
+                      textAlign: 'center'
+                    }}
+                  >
+                    {selectedDetail.metricsOrFormula.formula}
+                  </div>
+                )}
+                <ul style={{ margin: 0, paddingLeft: 16, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {selectedDetail.metricsOrFormula.details.map((d, i) => (
+                    <li key={i} style={{ fontSize: '12px', color: '#475569', lineHeight: 1.4 }}>
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {selectedDetail.bulletPoints && selectedDetail.bulletPoints.length > 0 && (
               <div
@@ -276,6 +429,28 @@ export const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ selectedDetail, on
               </div>
             )}
 
+            {selectedDetail.practicalCase && (
+              <div
+                style={{
+                  background: `${branchColor}08`,
+                  border: `1.5px solid ${branchColor}35`,
+                  borderRadius: '12px',
+                  padding: '14px 16px'
+                }}
+              >
+                <div style={{ fontSize: '11.5px', fontWeight: 800, color: branchColor, marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <Sparkles size={14} />
+                  {selectedDetail.practicalCase.title}
+                </div>
+                <p style={{ fontSize: '12px', color: '#334155', lineHeight: 1.5, marginBottom: 8 }}>
+                  {selectedDetail.practicalCase.description}
+                </p>
+                <div style={{ fontSize: '11.5px', fontWeight: 700, color: branchColor, background: '#ffffff', padding: '8px 10px', borderRadius: '6px', border: `1px solid ${branchColor}25` }}>
+                  💡 Solución / Clave: {selectedDetail.practicalCase.solutionOrTakeaway}
+                </div>
+              </div>
+            )}
+
             {selectedDetail.standards && (
               <div
                 style={{
@@ -286,7 +461,7 @@ export const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ selectedDetail, on
                 }}
               >
                 <div style={{ fontSize: '11.5px', fontWeight: 800, color: branchColor, marginBottom: 8 }}>
-                  Normas y Estándares Asociados
+                  Normas, Fuentes y Estándares
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {selectedDetail.standards.map((std, i) => (
@@ -334,305 +509,304 @@ export const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ selectedDetail, on
         {/* TAB 2: GUÍA OPERATIVA & SIMULADORES */}
         {activeTab === 'interactivo' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            {/* HERRAMIENTA 1: EXPLICACIÓN DE LA ECUACIÓN DE RENDIMIENTO */}
-            {(selectedDetail.branch === 'fundamentos' || selectedDetail.id.startsWith('fund-')) && (
-              <div
-                style={{
-                  background: '#f0fdf4',
-                  border: '1.5px solid #86efac',
-                  borderRadius: '14px',
-                  padding: '16px'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                  <Target size={18} color="#059669" />
-                  <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#065f46' }}>
-                    Ecuación de Rendimiento Global
+            {/* HERRAMIENTA 1: SIMULADOR DE VALOR ITIL 4 (UTILIDAD + GARANTÍA) */}
+            <div
+              style={{
+                background: isValueCreated ? '#f0fdf4' : '#fffbeb',
+                border: isValueCreated ? '1.5px solid #86efac' : '1.5px solid #fde68a',
+                borderRadius: '14px',
+                padding: '16px',
+                transition: 'all 0.2s'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Target size={18} color={isValueCreated ? '#059669' : '#d97706'} />
+                  <span style={{ fontSize: '13.5px', fontWeight: 800, color: isValueCreated ? '#065f46' : '#92400e' }}>
+                    Calculadora de Valor (Axelos)
                   </span>
                 </div>
-
-                <div style={{ background: '#ffffff', borderRadius: '10px', padding: '14px', border: '1px solid #bbf7d0', marginBottom: 12 }}>
-                  <div style={{ fontSize: '16px', fontWeight: 800, color: '#059669', textAlign: 'center', marginBottom: 6 }}>
-                    Eficacia + Eficiencia = Efectividad
-                  </div>
-                  <p style={{ fontSize: '12px', color: '#166534', margin: 0, textAlign: 'center', lineHeight: 1.45 }}>
-                    Cumplir las metas prometidas al usuario optimizando recursos económicos, tiempo y esfuerzo técnico.
-                  </p>
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  <div style={{ padding: '8px 10px', background: '#ffffff', borderRadius: '8px', border: '1px solid #dcfce7' }}>
-                    <strong style={{ color: '#059669', fontSize: '12px' }}>• Eficacia:</strong>{' '}
-                    <span style={{ color: '#334155', fontSize: '12px' }}>Mide el cumplimiento de metas: SLAs de resolución, First Contact Resolution y satisfacción.</span>
-                  </div>
-                  <div style={{ padding: '8px 10px', background: '#ffffff', borderRadius: '8px', border: '1px solid #dcfce7' }}>
-                    <strong style={{ color: '#0284c7', fontSize: '12px' }}>• Eficiencia:</strong>{' '}
-                    <span style={{ color: '#334155', fontSize: '12px' }}>Mide la optimización de recursos: costos por ticket, horas invertidas y capacidad de servidores.</span>
-                  </div>
-                  <div style={{ padding: '8px 10px', background: '#ffffff', borderRadius: '8px', border: '1px solid #dcfce7' }}>
-                    <strong style={{ color: '#7c3aed', fontSize: '12px' }}>• Efectividad:</strong>{' '}
-                    <span style={{ color: '#334155', fontSize: '12px' }}>El resultado sinérgico e integral de ambas dimensiones combinadas.</span>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* HERRAMIENTA 2: FASES PDCA */}
-            {(selectedDetail.branch === 'pdca' || selectedDetail.id.startsWith('pdca-')) && (
-              <div
-                style={{
-                  background: '#fffbeb',
-                  border: '1.5px solid #fde68a',
-                  borderRadius: '14px',
-                  padding: '16px'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                  <RotateCw size={18} color="#d97706" />
-                  <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#92400e' }}>
-                    Secuencia del Ciclo Deming (PDCA)
-                  </span>
-                </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 12 }}>
-                  {[
-                    { step: 0, label: '1. Planificar', color: '#0284c7' },
-                    { step: 1, label: '2. Hacer', color: '#d97706' },
-                    { step: 2, label: '3. Verificar', color: '#059669' },
-                    { step: 3, label: '4. Actuar', color: '#7c3aed' }
-                  ].map((item) => (
-                    <button
-                      key={item.step}
-                      onClick={() => setPdcaActiveStep(item.step)}
-                      style={{
-                        padding: '10px 8px',
-                        borderRadius: '8px',
-                        border: pdcaActiveStep === item.step ? `2px solid ${item.color}` : '1px solid #e2e8f0',
-                        background: pdcaActiveStep === item.step ? '#ffffff' : '#f8fafc',
-                        color: pdcaActiveStep === item.step ? item.color : '#64748b',
-                        fontWeight: 800,
-                        fontSize: '11.5px',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      {item.label}
-                    </button>
-                  ))}
-                </div>
-
-                <div
+                <span
                   style={{
-                    background: '#ffffff',
-                    padding: '14px',
-                    borderRadius: '10px',
-                    border: '1px solid #fef3c7',
-                    fontSize: '12.5px',
-                    color: '#334155',
-                    lineHeight: 1.5
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    padding: '3px 8px',
+                    borderRadius: '6px',
+                    background: isValueCreated ? '#dcfce7' : '#fef3c7',
+                    color: isValueCreated ? '#166534' : '#b45309'
                   }}
                 >
-                  {pdcaActiveStep === 0 && (
-                    <div>
-                      <strong style={{ color: '#0284c7' }}>1. Planificar (Plan):</strong> Identificar áreas críticas mediante análisis de procesos y encuestas de satisfacción de usuarios para definir objetivos claros y medibles.
-                    </div>
-                  )}
-                  {pdcaActiveStep === 1 && (
-                    <div>
-                      <strong style={{ color: '#d97706' }}>2. Hacer (Do):</strong> Implementar mejoras planificadas en pruebas piloto controladas y capacitar al personal técnico antes de liberar a producción masiva.
-                    </div>
-                  )}
-                  {pdcaActiveStep === 2 && (
-                    <div>
-                      <strong style={{ color: '#059669' }}>3. Verificar (Check):</strong> Evaluar resultados frente a metas iniciales mediante medición de KPIs de tickets, retroalimentación y auditorías internas.
-                    </div>
-                  )}
-                  {pdcaActiveStep === 3 && (
-                    <div>
-                      <strong style={{ color: '#7c3aed' }}>4. Actuar (Act):</strong> Estandarizar y consolidar las soluciones exitosas en manuales de procedimientos y reiniciar el ciclo con nuevos objetivos superiores.
-                    </div>
-                  )}
-                </div>
+                  {isValueCreated ? 'VALOR GENERADO' : 'VALOR INCOMPLETO'}
+                </span>
               </div>
-            )}
 
-            {/* HERRAMIENTA 3: CHECKLIST DE 6 PASOS ANTE CIBERINCIDENTES */}
-            {(selectedDetail.branch === 'seguridad' || selectedDetail.id === 'seg-protocolo') && (
-              <div
-                style={{
-                  background: '#faf5ff',
-                  border: '1.5px solid #e9d5ff',
-                  borderRadius: '14px',
-                  padding: '16px'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <Shield size={18} color="#7c3aed" />
-                    <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#5b21b6' }}>
-                      Protocolo de 6 Pasos ante Incidentes
-                    </span>
-                  </div>
-                  <span style={{ fontSize: '11px', color: '#6d28d9', fontWeight: 700 }}>
-                    {Object.values(resolvedIncidentSteps).filter(Boolean).length}/6 Completados
-                  </span>
+              <p style={{ fontSize: '11.5px', color: '#475569', margin: '0 0 12px 0', lineHeight: 1.4 }}>
+                Activa las condiciones para comprobar si el servicio de TI entrega valor co-creado real:
+              </p>
+
+              {/* Utilidad Checkboxes */}
+              <div style={{ background: '#ffffff', borderRadius: '10px', padding: '10px 12px', border: '1px solid #e2e8f0', marginBottom: 10 }}>
+                <div style={{ fontSize: '11.5px', fontWeight: 800, color: '#059669', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <span>1. Utilidad (Fit for Purpose - ¿Qué hace?)</span>
                 </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  {incidentStepsList.map((item) => {
-                    const isChecked = !!resolvedIncidentSteps[item.step];
-                    return (
-                      <div
-                        key={item.step}
-                        onClick={() => handleStepCheckbox(item.step)}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'flex-start',
-                          gap: 10,
-                          padding: '10px 12px',
-                          borderRadius: '8px',
-                          background: isChecked ? '#f0fdf4' : '#ffffff',
-                          border: isChecked ? '1.5px solid #86efac' : '1px solid #e2e8f0',
-                          cursor: 'pointer',
-                          transition: 'all 0.15s'
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: 20,
-                            height: 20,
-                            borderRadius: '5px',
-                            border: isChecked ? '2px solid #059669' : '2px solid #94a3b8',
-                            background: isChecked ? '#059669' : '#ffffff',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: '#ffffff',
-                            marginTop: 2,
-                            flexShrink: 0
-                          }}
-                        >
-                          {isChecked && <CheckCircle size={14} />}
-                        </div>
-                        <div>
-                          <div style={{ fontSize: '12px', fontWeight: 800, color: isChecked ? '#065f46' : '#0f172a' }}>
-                            Paso {item.step}: {item.title}
-                          </div>
-                          <div style={{ fontSize: '11.5px', color: '#475569', lineHeight: 1.4, marginTop: 2 }}>
-                            {item.action}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {/* HERRAMIENTA 4: EXPLORADOR DE LAS 7 CAPAS */}
-            {(selectedDetail.branch === 'seguridad' || selectedDetail.id === 'seg-capas') && (
-              <div
-                style={{
-                  background: '#faf5ff',
-                  border: '1.5px solid #e9d5ff',
-                  borderRadius: '14px',
-                  padding: '16px'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                  <Layers size={18} color="#7c3aed" />
-                  <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#5b21b6' }}>
-                    Defensa en Profundidad: 7 Capas
-                  </span>
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>
-                  {layersList.map((layer, idx) => (
-                    <button
-                      key={layer.num}
-                      onClick={() => setSelectedLayerIndex(idx)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        padding: '8px 12px',
-                        borderRadius: '6px',
-                        border: selectedLayerIndex === idx ? '1.5px solid #7c3aed' : '1px solid #e2e8f0',
-                        background: selectedLayerIndex === idx ? '#ede9fe' : '#ffffff',
-                        color: selectedLayerIndex === idx ? '#5b21b6' : '#334155',
-                        fontSize: '11.5px',
-                        fontWeight: 700,
-                        cursor: 'pointer'
-                      }}
-                    >
-                      <span>{layer.num} - {layer.name}</span>
-                      <span style={{ fontSize: '10px', color: '#7c3aed' }}>Ver detalle →</span>
-                    </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {[
+                    { key: 'reqs', label: 'Cumple el requerimiento funcional solicitado' },
+                    { key: 'speed', label: 'Mejora la velocidad o rendimiento del usuario' },
+                    { key: 'unblock', label: 'Elimina restricciones y tareas manuales' }
+                  ].map((u) => (
+                    <label key={u.key} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '11.5px', color: '#334155', cursor: 'pointer' }}>
+                      <input
+                        type="checkbox"
+                        checked={utilityChecks[u.key]}
+                        onChange={(e) => setUtilityChecks((prev) => ({ ...prev, [u.key]: e.target.checked }))}
+                      />
+                      <span>{u.label}</span>
+                    </label>
                   ))}
                 </div>
+              </div>
 
-                {layersList[selectedLayerIndex] && (
-                  <div
-                    style={{
-                      background: '#ffffff',
-                      padding: '12px',
-                      borderRadius: '8px',
-                      borderLeft: '4px solid #7c3aed',
-                      border: '1px solid #e2e8f0',
-                      borderLeftWidth: 4
-                    }}
-                  >
-                    <div style={{ fontSize: '12px', fontWeight: 800, color: '#5b21b6', marginBottom: 4 }}>
-                      {layersList[selectedLayerIndex].num} - {layersList[selectedLayerIndex].name}
-                    </div>
-                    <div style={{ fontSize: '11.5px', color: '#334155', marginBottom: 6, lineHeight: 1.4 }}>
-                      {layersList[selectedLayerIndex].desc}
-                    </div>
-                    <div style={{ fontSize: '11px', color: '#b91c1c', fontWeight: 600 }}>
-                      ⚠️ <strong>Riesgo mitigado:</strong> {layersList[selectedLayerIndex].threat}
-                    </div>
+              {/* Garantía Checkboxes */}
+              <div style={{ background: '#ffffff', borderRadius: '10px', padding: '10px 12px', border: '1px solid #e2e8f0', marginBottom: 12 }}>
+                <div style={{ fontSize: '11.5px', fontWeight: 800, color: '#2563eb', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <span>2. Garantía (Fit for Use - ¿Cómo se entrega?)</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {[
+                    { key: 'avail', label: 'Disponibilidad alta asegurada (>99.9%)' },
+                    { key: 'capac', label: 'Capacidad para soportar tráfico pico' },
+                    { key: 'sec', label: 'Seguridad, autenticación y cifrado de datos' },
+                    { key: 'cont', label: 'Continuidad operativa y backups probados' }
+                  ].map((w) => (
+                    <label key={w.key} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '11.5px', color: '#334155', cursor: 'pointer' }}>
+                      <input
+                        type="checkbox"
+                        checked={warrantyChecks[w.key]}
+                        onChange={(e) => setWarrantyChecks((prev) => ({ ...prev, [w.key]: e.target.checked }))}
+                      />
+                      <span>{w.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Resultado del simulador */}
+              <div
+                style={{
+                  padding: '10px 12px',
+                  borderRadius: '8px',
+                  background: isValueCreated ? '#dcfce7' : '#fee2e2',
+                  border: isValueCreated ? '1px solid #86efac' : '1px solid #fca5a5',
+                  fontSize: '11.5px',
+                  lineHeight: 1.45,
+                  color: isValueCreated ? '#166534' : '#991b1b',
+                  fontWeight: 600
+                }}
+              >
+                {isValueCreated ? (
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
+                    <CheckCircle size={16} style={{ flexShrink: 0, marginTop: 1 }} />
+                    <span>
+                      <strong>¡Servicio con Valor Pleno!</strong> Cumple con Utilidad ({utilityCount}/3) y Garantía ({warrantyCount}/4). La organización y los clientes perciben beneficios tangibles.
+                    </span>
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
+                    <AlertTriangle size={16} style={{ flexShrink: 0, marginTop: 1 }} />
+                    <span>
+                      <strong>Atención:</strong> Falta{' '}
+                      {!hasFullUtility && !hasFullWarranty
+                        ? 'Utilidad y Garantía'
+                        : !hasFullUtility
+                        ? 'Utilidad funcional adecuada'
+                        : 'Garantía operativa de servicio'}
+                      . En ITIL el valor no existe si cualquiera de las dos partes falla.
+                    </span>
                   </div>
                 )}
               </div>
-            )}
+            </div>
 
-            {/* HERRAMIENTA 5: MODELOS DE SERVICE DESK */}
-            {(selectedDetail.branch === 'servicedesk' || selectedDetail.id.startsWith('sd-')) && (
-              <div
-                style={{
-                  background: '#eff6ff',
-                  border: '1.5px solid #bfdbfe',
-                  borderRadius: '14px',
-                  padding: '16px'
-                }}
-              >
-                <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#1e40af', marginBottom: 10 }}>
-                  Comparativa de Modelos de Service Desk
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  {[
-                    { model: 'Centralizado', pro: 'Mayor control y procesos uniformes', con: 'Riesgo de saturación con alta demanda' },
-                    { model: 'Virtual', pro: 'Flexibilidad geográfica y menor costo', con: 'Dependencia crítica de conectividad' },
-                    { model: 'Follow-the-Sun', pro: 'Soporte 24/7 sin turnos nocturnos', con: 'Coordinación compleja entre husos horarios' },
-                    { model: 'Jerárquico (N1/N2/N3)', pro: 'Escalación técnica estructurada', con: 'Demoras si el ticket rebota entre niveles' }
-                  ].map((m) => (
-                    <div
-                      key={m.model}
-                      style={{
-                        padding: '10px 12px',
-                        borderRadius: '8px',
-                        background: '#ffffff',
-                        border: '1px solid #dbeafe'
-                      }}
-                    >
-                      <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#1d4ed8' }}>{m.model}</div>
-                      <div style={{ fontSize: '11.5px', color: '#15803d', marginTop: 2 }}>✓ Ventaja: {m.pro}</div>
-                      <div style={{ fontSize: '11.5px', color: '#b91c1c', marginTop: 2 }}>✗ Reto: {m.con}</div>
-                    </div>
-                  ))}
-                </div>
+            {/* HERRAMIENTA 2: MATRIZ DE LOS 7 PRINCIPIOS RECTORES (CASO 02) */}
+            <div
+              style={{
+                background: '#fffbeb',
+                border: '1.5px solid #fde68a',
+                borderRadius: '14px',
+                padding: '16px'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                <Compass size={18} color="#d97706" />
+                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#92400e' }}>
+                  Matriz Comparativa: 7 Principios ITIL (Caso 02)
+                </span>
               </div>
-            )}
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 12 }}>
+                {principlesList.map((p, idx) => (
+                  <button
+                    key={p.num}
+                    onClick={() => setSelectedPrincipleIndex(idx)}
+                    style={{
+                      padding: '6px 8px',
+                      borderRadius: '6px',
+                      border: selectedPrincipleIndex === idx ? '1.5px solid #d97706' : '1px solid #e2e8f0',
+                      background: selectedPrincipleIndex === idx ? '#fef3c7' : '#ffffff',
+                      color: selectedPrincipleIndex === idx ? '#92400e' : '#64748b',
+                      fontSize: '11px',
+                      fontWeight: 800,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    P{p.num}
+                  </button>
+                ))}
+              </div>
+
+              {principlesList[selectedPrincipleIndex] && (
+                <div
+                  style={{
+                    background: '#ffffff',
+                    padding: '12px 14px',
+                    borderRadius: '10px',
+                    border: '1px solid #fef3c7',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 8
+                  }}
+                >
+                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#92400e' }}>
+                    {principlesList[selectedPrincipleIndex].num}. {principlesList[selectedPrincipleIndex].name}
+                  </div>
+                  <div style={{ fontSize: '11.5px', color: '#475569', lineHeight: 1.45 }}>
+                    <strong>🎯 Propósito:</strong> {principlesList[selectedPrincipleIndex].prop}
+                  </div>
+                  <div style={{ fontSize: '11.5px', color: '#15803d', lineHeight: 1.45 }}>
+                    <strong>💻 Aplicación en Web/BD:</strong> {principlesList[selectedPrincipleIndex].webApp}
+                  </div>
+                  <div style={{ fontSize: '11.5px', color: '#b91c1c', lineHeight: 1.45 }}>
+                    <strong>⚠️ Error a evitar:</strong> {principlesList[selectedPrincipleIndex].error}
+                  </div>
+                  <div style={{ fontSize: '10.5px', color: '#6d28d9', fontWeight: 700 }}>
+                    ⚡ Marco Afín: {principlesList[selectedPrincipleIndex].afinidad}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* HERRAMIENTA 3: ARQUITECTURA DE BASES DE DATOS (CASO 01 & SLIDE 6) */}
+            <div
+              style={{
+                background: '#eff6ff',
+                border: '1.5px solid #bfdbfe',
+                borderRadius: '14px',
+                padding: '16px'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                <Database size={18} color="#2563eb" />
+                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#1e40af' }}>
+                  Arquetipos de Bases de Datos (Caso 01)
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 10 }}>
+                {dbList.map((db, idx) => (
+                  <button
+                    key={db.type}
+                    onClick={() => setSelectedDbIndex(idx)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '7px 10px',
+                      borderRadius: '6px',
+                      border: selectedDbIndex === idx ? '1.5px solid #2563eb' : '1px solid #dbeafe',
+                      background: selectedDbIndex === idx ? '#dbeafe' : '#ffffff',
+                      color: selectedDbIndex === idx ? '#1e40af' : '#334155',
+                      fontSize: '11.5px',
+                      fontWeight: 700,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <span>{db.type}</span>
+                    <span style={{ fontSize: '10px', color: '#2563eb' }}>{db.examples.split(',')[0]} →</span>
+                  </button>
+                ))}
+              </div>
+
+              {dbList[selectedDbIndex] && (
+                <div
+                  style={{
+                    background: '#ffffff',
+                    padding: '12px',
+                    borderRadius: '8px',
+                    borderLeft: '4px solid #2563eb',
+                    border: '1px solid #dbeafe',
+                    borderLeftWidth: 4
+                  }}
+                >
+                  <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#1e40af', marginBottom: 2 }}>
+                    {dbList[selectedDbIndex].type}
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#64748b', marginBottom: 6, fontFamily: 'monospace' }}>
+                    Ejemplos: {dbList[selectedDbIndex].examples}
+                  </div>
+                  <div style={{ fontSize: '11.5px', color: '#334155', lineHeight: 1.4, marginBottom: 6 }}>
+                    <strong>🎯 Idoneidad:</strong> {dbList[selectedDbIndex].fit}
+                  </div>
+                  <div style={{ fontSize: '11.5px', color: '#047857', lineHeight: 1.4 }}>
+                    <strong>💎 Valor de Servicio:</strong> {dbList[selectedDbIndex].value}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* HERRAMIENTA 4: ACTIVIDADES DE LA CADENA DE VALOR (SVC) */}
+            <div
+              style={{
+                background: '#faf5ff',
+                border: '1.5px solid #e9d5ff',
+                borderRadius: '14px',
+                padding: '16px'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+                <Workflow size={18} color="#7c3aed" />
+                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#5b21b6' }}>
+                  6 Actividades de la Cadena de Valor (SVC)
+                </span>
+              </div>
+              <p style={{ fontSize: '11.5px', color: '#475569', margin: '0 0 10px 0', lineHeight: 1.4 }}>
+                Las actividades que componen los flujos de valor en el SVS de ITIL 4:
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+                {[
+                  { name: '1. Planear', desc: 'Visión compartida y dirección' },
+                  { name: '2. Mejorar', desc: 'Evolución continua en todo nivel' },
+                  { name: '3. Comprometer', desc: 'Gestión con stakeholders (Engage)' },
+                  { name: '4. Diseñar/Transición', desc: 'Cumplir expectativas de calidad' },
+                  { name: '5. Obtener/Construir', desc: 'Desarrollar y adquirir activos' },
+                  { name: '6. Entregar/Soporte', desc: 'Operar según SLAs acordados' }
+                ].map((act, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      padding: '8px',
+                      borderRadius: '6px',
+                      background: '#ffffff',
+                      border: '1px solid #e9d5ff',
+                      fontSize: '11px'
+                    }}
+                  >
+                    <div style={{ fontWeight: 800, color: '#6d28d9' }}>{act.name}</div>
+                    <div style={{ color: '#64748b', fontSize: '10.5px' }}>{act.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -649,7 +823,7 @@ export const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ selectedDetail, on
         }}
       >
         <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
-          Gestión del Servicio de TI · UTP 2026
+          Gestión del Servicio de TI · Semana 11 · UTP 2026
         </span>
 
         <button

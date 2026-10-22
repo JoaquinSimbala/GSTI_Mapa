@@ -67,7 +67,7 @@ export const StepNode: React.FC<NodeProps> = memo(({ data, selected }) => {
             fontWeight: 600
           }}
         >
-          Ciclo Deming
+          {nodeData.secondaryInfo || (nodeData.branch === 'principios' ? 'Principio ITIL' : 'Componente')}
         </span>
       </div>
 

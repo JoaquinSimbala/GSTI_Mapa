@@ -13,43 +13,43 @@ interface TourStep {
 const TOUR_STEPS: TourStep[] = [
   {
     nodeId: 'central-node',
-    branch: 'Núcleo Central',
-    title: 'Mejora Continua del Servicio de TI',
-    subtitle: 'Propósito Estratégico y Calidad',
-    description: 'El núcleo del modelo: mantener la competitividad de la organización, adaptarse al cambio, satisfacer al cliente, reducir costos operativos, eliminar desperdicios (Lean IT) e impulsar la productividad técnica.',
-    keyHighlight: 'Propósito: Mantener competitividad, adaptarse al cambio y reducir costos operativos con Lean IT.'
+    branch: 'Núcleo Central SVS',
+    title: 'Sistema de Valor del Servicio (SVS) - ITIL 4',
+    subtitle: 'Propósito Estratégico y Logro de Sesión UTP',
+    description: 'El corazón de ITIL 4: transforma la Demanda y Oportunidades del cliente en Valor tangible y co-creado mediante gobernanza, cadena de valor y prácticas integradas alineadas al negocio.',
+    keyHighlight: 'Logro Central: Demostrar capacidad para transformar la demanda en valor tangible con utilidad y garantía.'
   },
   {
-    nodeId: 'branch-fundamentos',
-    branch: 'Fundamentos',
-    title: 'Fundamentos y Rendimiento Global',
-    subtitle: 'Eficacia + Eficiencia = Efectividad',
-    description: 'Para mejorar hay que medir. El rendimiento global no se logra solo alcanzando metas a cualquier costo, sino optimizando cada recurso invertido para generar verdadera efectividad del servicio.',
-    keyHighlight: 'Ecuación Clave: Eficacia (logro de metas) + Eficiencia (optimización de recursos) = Efectividad integral.'
+    nodeId: 'branch-valor',
+    branch: '1. Arquetipos de Valor',
+    title: 'Concepción y Arquetipos del Valor',
+    subtitle: 'Utilidad + Garantía, Rappaport y los 12 DBMS',
+    description: 'El valor requiere idoneidad funcional (Utilidad) y certeza de entrega (Garantía: disponibilidad, capacidad, continuidad y seguridad), complementado por la cadena de Porter y la selección de bases de datos.',
+    keyHighlight: 'Ecuación ITIL: Valor = Beneficios Percibidos = Utilidad (Fit for purpose) + Garantía (Fit for use).'
   },
   {
-    nodeId: 'branch-pdca',
-    branch: 'Ciclo PDCA',
-    title: 'Metodología Cíclica: Ciclo PDCA (Deming)',
-    subtitle: 'Planificar, Hacer, Verificar, Actuar',
-    description: 'La base iterativa universal de ISO 9001. Comienza analizando procesos y encuestas (Plan), ejecuta pilotos controlados (Do), mide KPIs y feedback (Check), y consolida mediante manuales antes de reiniciar la espiral (Act).',
-    keyHighlight: 'Repetición continua: El ciclo nunca termina; cada vuelta eleva el estándar de calidad del servicio.'
+    nodeId: 'branch-svs',
+    branch: '2. Componentes SVS',
+    title: 'Arquitectura Operativa del SVS',
+    subtitle: 'Demanda ➔ Gobernanza ➔ Cadena SVC ➔ Valor',
+    description: 'El flujo de extremo a extremo que conecta la Oportunidad/Demanda inicial con el resultado de valor a través de la Gobernanza directiva, las 6 actividades de la Cadena de Valor (SVC) y 34 prácticas.',
+    keyHighlight: 'Operación Ágil: La Cadena de Valor (SVC) combina 6 actividades modulares para crear flujos de valor flexibles.'
   },
   {
-    nodeId: 'branch-servicedesk',
-    branch: 'Service Desk',
-    title: 'Service Desk y Gestión de Cambios',
-    subtitle: 'Operaciones ITSM y Estabilidad',
-    description: 'El punto único de contacto (SPOC) que opera con modelos Centralizado, Virtual o Follow-the-Sun. Se apoya en ServiceNow/Zendesk e impone los 4 Controles de Cambio (RFC, Evaluación, Implementación Controlada y Monitoreo).',
-    keyHighlight: 'Regla de Oro: Toda modificación en producción debe contar con evaluación de riesgos y plan de rollback.'
+    nodeId: 'branch-principios',
+    branch: '3. 7 Principios ITIL',
+    title: 'Los 7 Principios Rectores de ITIL 4',
+    subtitle: 'Guías Universales para Decisiones en TI',
+    description: 'Recomendaciones imperecederas: 1. Centrarse en valor, 2. Comenzar donde se está, 3. Progresar iterativamente con feedback, 4. Colaborar y visibilidad, 5. Pensar holísticamente, 6. Mantenerlo simple, y 7. Optimizar y automatizar.',
+    keyHighlight: 'Regla de Oro: Simplificar y optimizar procesos antes de automatizarlos, y basarse en sprints con Scrum y PDCA.'
   },
   {
-    nodeId: 'branch-seguridad',
-    branch: 'Seguridad & ISO',
-    title: 'Marcos Normativos y Gestión de Seguridad',
-    subtitle: 'Ecosistema ISO, 6 Pasos y 7 Capas',
-    description: 'Gobernanza bajo ISO 38500, riesgos bajo ISO 31000/27005 y seguridad con ISO 27001/27032. Incluye el protocolo de 6 pasos ante ciberincidentes y la defensa en profundidad en 7 capas (desde física hasta humana).',
-    keyHighlight: 'Ciberdefensa: El usuario es la 7ª capa (humana) y la última línea de defensa ante ciberamenazas.'
+    nodeId: 'branch-practica',
+    branch: '4. Casos Prácticos UTP',
+    title: 'Casos Prácticos y Demostración de Aprendizaje',
+    subtitle: 'Aplicación en Web, Bases de Datos y Matriz SVS',
+    description: 'Resolución de los 3 casos de la sesión: Caso 01 (Sistema Web con BD generador de valor), Caso 02 (Cuadro comparativo analítico de principios) y Caso 03 (Mapa conceptual de la sesión).',
+    keyHighlight: 'Aplicación Real: Demostrar cómo una arquitectura web en la nube entrega valor tangible reduciendo costos y fallas.'
   }
 ];
 

@@ -4,10 +4,9 @@ import {
   Compass,
   Layers,
   RotateCcw,
-  TrendingUp,
-  RotateCw,
-  Headset,
-  ShieldAlert
+  Target,
+  Cpu,
+  Award
 } from 'lucide-react';
 import { CONCEPT_DETAILS } from '../data/mapData';
 
@@ -31,10 +30,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
 
   const filterOptions = [
     { id: 'all', label: 'Todo el Mapa', icon: Layers, color: '#4f46e5' },
-    { id: 'fundamentos', label: '1. Fundamentos', icon: TrendingUp, color: '#059669' },
-    { id: 'pdca', label: '2. Ciclo PDCA', icon: RotateCw, color: '#d97706' },
-    { id: 'servicedesk', label: '3. Service Desk', icon: Headset, color: '#2563eb' },
-    { id: 'seguridad', label: '4. Ciberseguridad', icon: ShieldAlert, color: '#7c3aed' }
+    { id: 'valor', label: '1. Arquetipos de Valor', icon: Target, color: '#059669' },
+    { id: 'svs', label: '2. Componentes SVS', icon: Cpu, color: '#2563eb' },
+    { id: 'principios', label: '3. 7 Principios ITIL', icon: Compass, color: '#d97706' },
+    { id: 'practica', label: '4. Casos Prácticos UTP', icon: Award, color: '#7c3aed' }
   ];
 
   const searchResults = Object.values(CONCEPT_DETAILS).filter((item) => {
@@ -55,10 +54,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
         <div className="header-brand">
           <div className="header-titles">
             <h1 className="header-title">
-              MEJORA CONTINUA DEL SERVICIO DE TI
+              SISTEMA DE VALOR DEL SERVICIO (SVS) - ITIL 4
             </h1>
             <p className="header-subtitle">
-              Marcos normativos, ciclo PDCA, gestión de cambios y ciberseguridad aplicada al Service Desk
+              Gestión del Servicio de TI · Semana 11, Sesión 1 (UTP) · Demanda a Valor, Gobernanza y 7 Principios
             </p>
           </div>
         </div>
@@ -93,7 +92,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
               <Search size={14} color="#64748b" className="search-icon" />
               <input
                 type="text"
-                placeholder="Buscar tema, norma ISO..."
+                placeholder="Buscar tema, principio, base de datos..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onFocus={() => setIsSearchFocused(true)}
@@ -122,23 +121,24 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
             )}
           </div>
 
-          {/* Tour Guiado Button */}
+          {/* Guided Tour Trigger Button */}
           <button
             onClick={onStartTour}
-            title="Iniciar recorrido guiado interactivo"
-            className="action-btn tour-btn"
+            className="action-btn tour-action-btn"
+            title="Iniciar recorrido guiado"
           >
             <Compass size={14} />
-            <span className="btn-label">Tour Guiado</span>
+            <span>Tour Guiado</span>
           </button>
 
           {/* Reset View Button */}
           <button
             onClick={onResetView}
-            title="Centrar y reajustar vista del mapa"
-            className="action-btn reset-btn"
+            className="action-btn reset-action-btn"
+            title="Restablecer vista global"
           >
             <RotateCcw size={14} />
+            <span>Centrar</span>
           </button>
         </div>
       </div>

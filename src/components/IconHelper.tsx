@@ -21,6 +21,20 @@ import {
   AlertTriangle,
   Layers,
   HelpCircle,
+  Database,
+  Globe,
+  Server,
+  Zap,
+  Users,
+  Shield,
+  Code,
+  Workflow,
+  BookOpen,
+  Rocket,
+  CheckSquare,
+  Scale,
+  Activity,
+  Boxes,
   LucideProps
 } from 'lucide-react';
 
@@ -44,7 +58,22 @@ const ICON_MAP: Record<string, React.FC<LucideProps>> = {
   SlidersHorizontal,
   FileCheck,
   AlertTriangle,
-  Layers
+  Layers,
+  HelpCircle,
+  Database,
+  Globe,
+  Server,
+  Zap,
+  Users,
+  Shield,
+  Code,
+  Workflow,
+  BookOpen,
+  Rocket,
+  CheckSquare,
+  Scale,
+  Activity,
+  Boxes
 };
 
 interface IconRendererProps extends LucideProps {
