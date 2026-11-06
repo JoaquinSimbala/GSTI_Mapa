@@ -4,7 +4,7 @@ export interface CustomNodeData {
   id: string;
   title: string;
   subtitle?: string;
-  branch: 'central' | 'valor' | 'svs' | 'principios' | 'practica';
+  branch: 'central' | 'generales' | 'tecnicas' | 'certificacion' | 'practica';
   branchLabel: string;
   iconName: string;
   summary: string;
@@ -18,7 +18,7 @@ export interface CustomNodeData {
   [key: string]: unknown;
 }
 
-// Layout ultra espacioso, balanceado y sin solapamiento de cajas para Semana 11 - Sesión 1 UTP
+// Layout balanceado, espacioso y sin solapamiento para Semana 13 - Sesión 2 UTP
 export const INITIAL_NODES: Node<CustomNodeData>[] = [
   // ================= NODO CENTRAL =================
   {
@@ -27,488 +27,672 @@ export const INITIAL_NODES: Node<CustomNodeData>[] = [
     position: { x: 0, y: 0 },
     data: {
       id: 'central-node',
-      title: 'SISTEMA DE VALOR DEL SERVICIO (SVS) - ITIL 4',
-      subtitle: 'Transformación de Demanda/Oportunidad en Valor Tangible de Negocio (UTP S11)',
+      title: 'PRÁCTICAS DE GESTIÓN ITIL & ESQUEMA DE CERTIFICACIÓN',
+      subtitle: 'Gestión de Servicios de TI · Semana 13 - Sesión 2 (UTP Agosto 2026)',
       branch: 'central',
       branchLabel: 'Núcleo Central',
       iconName: 'Sparkles',
-      summary: 'Marco integral que garantiza que todas las actividades, componentes y prácticas de TI trabajen juntos de forma ágil y coordinada para co-crear valor mediante productos y servicios alineados al negocio.',
-      tags: ['ITIL 4', 'SVS', 'Creación de Valor', 'UTP S11', 'Demanda a Valor'],
+      summary: 'Marco integrador que comprende las prácticas de gestión de servicios (12 generales y 3 técnicas), normas internacionales (ISO 20000, ISO 22237, ISO 31000, COBIT) y el esquema de certificación PeopleCert para optimizar la calidad y el valor en organizaciones.',
+      tags: ['ITIL 4', 'Prácticas de Gestión', 'Certificación', 'UTP S13', 'ISO 20000', 'COBIT'],
       canExpand: true,
       isExpanded: true,
-      badge: 'Núcleo Central SVS'
+      badge: 'Núcleo Central S13'
     }
   },
 
-  // ================= RAMA 1: CONCEPCIÓN Y ARQUETIPOS DEL VALOR (Superior Izquierda) =================
+  // ================= RAMA 1: PRÁCTICAS DE GESTIÓN GENERAL ITIL (Superior Izquierda) =================
   {
-    id: 'branch-valor',
+    id: 'branch-generales',
     type: 'branchNode',
-    position: { x: -920, y: -580 },
+    position: { x: -950, y: -450 },
     data: {
-      id: 'branch-valor',
-      title: 'CONCEPCIÓN Y ARQUETIPOS DEL VALOR',
-      subtitle: 'Definición ITIL (Utilidad + Garantía), Porter, Accionistas y Arquetipos de TI',
-      branch: 'valor',
-      branchLabel: '1. Arquetipos de Valor',
-      iconName: 'Target',
-      summary: 'El valor no es solo monetario: en ITIL se define como la combinación de utilidad y garantía percibida por el cliente, soportada por arquitecturas técnicas y bases de datos.',
-      tags: ['Utilidad', 'Garantía', 'Porter', 'Bases de Datos'],
-      accentColor: '#059669',
-      badge: 'Dimensión de Valor'
-    }
-  },
-  {
-    id: 'val-arquetipos-tech',
-    type: 'conceptNode',
-    position: { x: -1450, y: -600 },
-    data: {
-      id: 'val-arquetipos-tech',
-      title: 'Arquetipos de Software y Bases de Datos',
-      subtitle: 'Scrum, Compilación y los 12 Tipos de DBMS',
-      branch: 'valor',
-      branchLabel: '1. Arquetipos de Valor',
-      iconName: 'Database',
-      summary: 'El valor se materializa técnicamente: capas Vista ➔ Procesamiento ➔ DBMS (Relacional, Documental, In-Memory, Vectorial para IA, Grafos, etc.).',
-      tags: ['Scrum', 'DBMS', 'Vector DB', 'SQL/NoSQL'],
-      accentColor: '#059669',
-      badge: 'Arquitectura TI'
-    }
-  },
-  {
-    id: 'val-financiero-porter',
-    type: 'conceptNode',
-    position: { x: -500, y: -600 },
-    data: {
-      id: 'val-financiero-porter',
-      title: 'Enfoque Financiero & Cadena de Porter',
-      subtitle: 'Rappaport (1986) y Actividades Primarias/Apoyo',
-      branch: 'valor',
-      branchLabel: '1. Arquetipos de Valor',
-      iconName: 'TrendingUp',
-      summary: '• Rappaport (1986): Flujos futuros descontados para accionistas.\n• Porter: Margen de valor integrando actividades primarias y de apoyo.',
-      tags: ['Rappaport', 'Porter', 'Margen'],
-      accentColor: '#059669',
-      badge: 'Estrategia'
-    }
-  },
-  {
-    id: 'val-definicion-itil',
-    type: 'conceptNode',
-    position: { x: -1100, y: -290 },
-    data: {
-      id: 'val-definicion-itil',
-      title: 'Ecuación de Valor en ITIL (Axelos)',
-      subtitle: 'Beneficios Percibidos = Utilidad + Garantía',
-      branch: 'valor',
-      branchLabel: '1. Arquetipos de Valor',
-      iconName: 'Calculator',
-      summary: 'Suma de los beneficios percibidos, utilidad y garantía que un servicio proporciona a los clientes. Ambos elementos son imprescindibles.',
-      tags: ['Axelos 2011', 'Utilidad', 'Garantía'],
-      accentColor: '#059669',
-      badge: 'Fórmula ITIL'
-    }
-  },
-  {
-    id: 'val-utilidad',
-    type: 'detailNode',
-    position: { x: -1360, y: 20 },
-    data: {
-      id: 'val-utilidad',
-      title: 'Utilidad',
-      subtitle: 'Fit for Purpose (¿Qué hace?)',
-      branch: 'valor',
-      branchLabel: '1. Arquetipos de Valor',
-      iconName: 'Wrench',
-      summary: 'Funcionalidad ofrecida para satisfacer una necesidad real, mejorando rendimiento o eliminando restricciones.',
-      tags: ['Fit for Purpose', 'Funcionalidad'],
-      accentColor: '#059669'
-    }
-  },
-  {
-    id: 'val-garantia',
-    type: 'detailNode',
-    position: { x: -1120, y: 20 },
-    data: {
-      id: 'val-garantia',
-      title: 'Garantía',
-      subtitle: 'Fit for Use (¿Cómo se entrega?)',
-      branch: 'valor',
-      branchLabel: '1. Arquetipos de Valor',
-      iconName: 'Shield',
-      summary: 'Certeza de que el servicio cumplirá con disponibilidad, capacidad, continuidad y seguridad de la información.',
-      tags: ['Fit for Use', 'SLA', 'Seguridad'],
-      accentColor: '#059669'
-    }
-  },
-  {
-    id: 'val-cocreacion',
-    type: 'detailNode',
-    position: { x: -880, y: 20 },
-    data: {
-      id: 'val-cocreacion',
-      title: 'Co-Creación',
-      subtitle: 'Relación de Colaboración',
-      branch: 'valor',
-      branchLabel: '1. Arquetipos de Valor',
-      iconName: 'Users',
-      summary: 'En ITIL 4 el valor nunca se transfiere unidireccionalmente; se co-crea activamente entre proveedor y consumidor.',
-      tags: ['Colaboración', 'Stakeholders'],
-      accentColor: '#059669'
-    }
-  },
-
-  // ================= RAMA 2: ESTRUCTURA DEL SISTEMA DE VALOR DEL SERVICIO (Superior Derecha) =================
-  {
-    id: 'branch-svs',
-    type: 'branchNode',
-    position: { x: 920, y: -580 },
-    data: {
-      id: 'branch-svs',
-      title: 'SISTEMA DE VALOR DEL SERVICIO (SVS)',
-      subtitle: 'Arquitectura de 5 Componentes: Entrada ➔ SVS ➔ Salida',
-      branch: 'svs',
-      branchLabel: '2. Componentes SVS',
+      id: 'branch-generales',
+      title: 'PRÁCTICAS DE GESTIÓN GENERAL ITIL',
+      subtitle: '12 Capacidades Directivas y Organizacionales para Alinear TI al Negocio',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
       iconName: 'Layers',
-      summary: 'Ecosistema holístico de ITIL 4 que asegura que la demanda del cliente se canalice a través de gobernanza, cadena de valor y prácticas para entregar valor real.',
-      tags: ['SVS', 'SVC', 'Gobernanza', 'Prácticas'],
-      accentColor: '#2563eb',
-      badge: 'Marco Operativo'
+      summary: 'Permiten estandarizar operaciones, alinear tecnología con objetivos estratégicos, mejorar calidad y confiabilidad, y fomentar la mejora continua e innovación sistemática.',
+      tags: ['Gobernanza', 'Estrategia', 'Mejora Continua', 'Riesgos', 'Finanzas'],
+      accentColor: '#059669',
+      badge: '12 Prácticas Generales'
     }
   },
   {
-    id: 'svs-demanda-valor',
+    id: 'gen-arquitectura',
     type: 'conceptNode',
-    position: { x: 500, y: -600 },
+    position: { x: -1550, y: -800 },
     data: {
-      id: 'svs-demanda-valor',
-      title: 'Entrada: Oportunidad / Demanda ➔ Salida: Valor',
-      subtitle: 'Disparador inicial y resultado medible del sistema',
-      branch: 'svs',
-      branchLabel: '2. Componentes SVS',
-      iconName: 'Zap',
-      summary: 'La Oportunidad y Demanda representan las necesidades del mercado y clientes; el SVS las transforma en valor tangible y alineado al negocio.',
-      tags: ['Demanda', 'Oportunidad', 'Outcome'],
-      accentColor: '#2563eb',
-      badge: 'Flujo E2E'
+      id: 'gen-arquitectura',
+      title: 'Gestión de Arquitectura',
+      subtitle: 'Estructura TI & Negocio · Data Platform',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
+      iconName: 'Boxes',
+      summary: 'Define la estructura y componentes del negocio y TI para apoyar la estrategia. Incluye plataformas de datos modernas (Data Lakes, Data Loaders, Service Data y AI Stores).',
+      tags: ['Arquitectura', 'Data Lake', 'Big Data', 'Semantix'],
+      accentColor: '#059669',
+      badge: 'Estrategia TI'
     }
   },
   {
-    id: 'svs-gobernanza',
+    id: 'gen-mejora-continua',
+    type: 'stepNode',
+    position: { x: -1050, y: -850 },
+    data: {
+      id: 'gen-mejora-continua',
+      title: 'Gestión Continua de la Mejora (PDCA)',
+      subtitle: 'Ciclo Deming: Plan ➔ Do ➔ Check ➔ Act',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
+      iconName: 'RotateCw',
+      summary: 'Identifica sistemáticamente oportunidades de mejora en servicios, procesos y prácticas aplicando el ciclo PDCA y el Registro de Mejora Continua (CIR).',
+      tags: ['PDCA', 'Deming', 'CIR', 'Kaizen'],
+      accentColor: '#059669',
+      badge: 'Calidad Continua'
+    }
+  },
+  {
+    id: 'gen-seguridad',
     type: 'conceptNode',
-    position: { x: 1350, y: -600 },
+    position: { x: -550, y: -800 },
     data: {
-      id: 'svs-gobernanza',
-      title: 'Gobernanza (Governance)',
-      subtitle: 'Dirección, Evaluación y Monitoreo Estratégico',
-      branch: 'svs',
-      branchLabel: '2. Componentes SVS',
-      iconName: 'Scale',
-      summary: 'Mecanismo mediante el cual la organización es dirigida y controlada. Asegura alineación con las políticas y directrices del negocio (ISO 38500).',
-      tags: ['Gobernanza', 'ISO 38500', 'Dirección'],
-      accentColor: '#2563eb',
-      badge: 'Eje Directivo'
+      id: 'gen-seguridad',
+      title: 'Seguridad de la Información',
+      subtitle: 'Tríada CIA: Confidencialidad, Integridad y Disponibilidad',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
+      iconName: 'Shield',
+      summary: 'Protege la confidencialidad, integridad y disponibilidad de la información frente a ciberamenazas y garantiza el cumplimiento normativo.',
+      tags: ['Seguridad', 'Tríada CIA', 'ISO 27001', 'Ciberseguridad'],
+      accentColor: '#059669',
+      badge: 'Ciberdefensa'
     }
   },
   {
-    id: 'svs-cadena-valor',
-    type: 'stepNode',
-    position: { x: 680, y: -290 },
+    id: 'gen-conocimiento',
+    type: 'conceptNode',
+    position: { x: -1550, y: -540 },
     data: {
-      id: 'svs-cadena-valor',
-      title: 'Cadena de Valor del Servicio (SVC)',
-      subtitle: 'Modelo Operativo de 6 Actividades Clave',
-      branch: 'svs',
-      branchLabel: '2. Componentes SVS',
-      iconName: 'Workflow',
-      summary: 'Planear, Mejorar, Comprometer (Engage), Diseñar/Transición, Obtener/Construir, y Entregar/Soporte para crear flujos de valor flexibles.',
-      tags: ['SVC', '6 Actividades', 'Flujos de Valor'],
-      accentColor: '#2563eb',
-      badge: 'Núcleo Operativo'
+      id: 'gen-conocimiento',
+      title: 'Gestión del Conocimiento',
+      subtitle: 'Información Correcta en el Momento Oportuno',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
+      iconName: 'BookOpen',
+      summary: 'Asegura que la información y el conocimiento corporativo estén disponibles para habilitar decisiones ágiles y resolver incidentes con la KEDB.',
+      tags: ['Conocimiento', 'KEDB', 'DIKW', 'Autoservicio'],
+      accentColor: '#059669',
+      badge: 'Capital Intelectual'
     }
   },
   {
-    id: 'svs-practicas-mejora',
-    type: 'stepNode',
-    position: { x: 1200, y: -290 },
+    id: 'gen-medicion-reporte',
+    type: 'conceptNode',
+    position: { x: -1550, y: -280 },
     data: {
-      id: 'svs-practicas-mejora',
-      title: 'Prácticas ITIL & Mejora Continua',
-      subtitle: '34 Prácticas organizacionales y ciclo continuo',
-      branch: 'svs',
-      branchLabel: '2. Componentes SVS',
-      iconName: 'RotateCw',
-      summary: 'Conjunto de capacidades organizacionales (Gestión General, de Servicios y Técnicas) alimentadas permanentemente por la práctica de Mejora Continua.',
-      tags: ['34 Prácticas', 'Mejora Continua', 'Resiliencia'],
-      accentColor: '#2563eb',
-      badge: 'Capacidades TI'
-    }
-  },
-
-  // ================= RAMA 3: LOS SIETE (7) PRINCIPIOS RECTORES DE ITIL (Inferior Izquierda) =================
-  {
-    id: 'branch-principios',
-    type: 'branchNode',
-    position: { x: -950, y: 340 },
-    data: {
-      id: 'branch-principios',
-      title: 'LOS 7 PRINCIPIOS RECTORES DE ITIL 4',
-      subtitle: 'Guías Universales para la Toma de Decisiones y Acción en TI',
-      branch: 'principios',
-      branchLabel: '3. 7 Principios ITIL',
-      iconName: 'Compass',
-      summary: 'Recomendaciones fundamentales e imperecederas que orientan a una organización en cualquier circunstancia, sin importar sus objetivos ni sus herramientas.',
-      tags: ['Principios Rectores', 'Agilidad', 'Scrum', 'Lean'],
-      accentColor: '#d97706',
-      badge: 'Filosofía ITIL'
+      id: 'gen-medicion-reporte',
+      title: 'Medición y Reporte',
+      subtitle: 'Métricas, KPIs y Cuadros de Mando',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
+      iconName: 'BarChart3',
+      summary: 'Define métricas, indicadores y reportes cuantitativos y cualitativos para respaldar la toma de decisiones directivas y evitar el "efecto sandía".',
+      tags: ['Métricas', 'KPIs', 'SLAs', 'Dashboards'],
+      accentColor: '#059669',
+      badge: 'Telemetría'
     }
   },
   {
-    id: 'princ-1-valor',
-    type: 'stepNode',
-    position: { x: -1600, y: 220 },
+    id: 'gen-cambio-org',
+    type: 'conceptNode',
+    position: { x: -1550, y: -20 },
     data: {
-      id: 'princ-1-valor',
-      title: '1. Centrarse en el Valor',
-      subtitle: 'Aportar valor al cliente y partes interesadas',
-      branch: 'principios',
-      branchLabel: '3. 7 Principios ITIL',
-      iconName: 'Target',
-      summary: 'Todo lo que haga la organización debe aportar valor al cliente y stakeholders. Comprender la experiencia del usuario y priorizar el impacto.',
-      tags: ['Customer Value', 'Experiencia', 'Prioridad'],
-      accentColor: '#d97706',
-      badge: 'Principio 1'
-    }
-  },
-  {
-    id: 'princ-2-donde',
-    type: 'stepNode',
-    position: { x: -1600, y: 470 },
-    data: {
-      id: 'princ-2-donde',
-      title: '2. Comenzar Donde se Está',
-      subtitle: 'Aprovechar recursos y conocimientos existentes',
-      branch: 'principios',
-      branchLabel: '3. 7 Principios ITIL',
-      iconName: 'CheckCircle2',
-      summary: 'Evaluar la situación actual y aprovechar lo que ya funciona antes de hacer cambios. No empezar de cero; medir objetivamente.',
-      tags: ['Diagnóstico', 'Reutilización', 'Estado Actual'],
-      accentColor: '#d97706',
-      badge: 'Principio 2'
-    }
-  },
-  {
-    id: 'princ-3-iterar',
-    type: 'stepNode',
-    position: { x: -1600, y: 720 },
-    data: {
-      id: 'princ-3-iterar',
-      title: '3. Progresar Iterativamente con Retroalimentación',
-      subtitle: 'Avanzar en pequeños pasos y feedback continuo',
-      branch: 'principios',
-      branchLabel: '3. 7 Principios ITIL',
-      iconName: 'RotateCw',
-      summary: 'Avanzar por etapas pequeñas, recoger feedback continuo y mejorar (ciclos PDCA y Sprints de Scrum de 1 a 4 semanas).',
-      tags: ['Scrum', 'Sprints', 'PDCA', 'Feedback'],
-      accentColor: '#d97706',
-      badge: 'Principio 3'
-    }
-  },
-  {
-    id: 'princ-4-colaborar',
-    type: 'stepNode',
-    position: { x: -1600, y: 970 },
-    data: {
-      id: 'princ-4-colaborar',
-      title: '4. Colaborar y Promover la Visibilidad',
-      subtitle: 'Cooperación transparente eliminando silos',
-      branch: 'principios',
-      branchLabel: '3. 7 Principios ITIL',
+      id: 'gen-cambio-org',
+      title: 'Cambio Organizacional (OCM)',
+      subtitle: 'Adopción Humana y Cultura Empresarial',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
       iconName: 'Users',
-      summary: 'Fomentar la cooperación entre equipos y compartir información de forma transparente (Product Owner, Scrum Master, Developers).',
-      tags: ['Transparencia', 'Visibilidad', 'Sinergia'],
-      accentColor: '#d97706',
-      badge: 'Principio 4'
+      summary: 'Facilita la adopción humana de las transformaciones tecnológicas en la empresa, superando la resistencia al cambio mediante ADKAR y Kotter.',
+      tags: ['Factor Humano', 'Cultura', 'ADKAR', 'Adopción'],
+      accentColor: '#059669',
+      badge: 'Gestión Humana'
     }
   },
   {
-    id: 'princ-5-holistico',
-    type: 'stepNode',
-    position: { x: -1180, y: 970 },
+    id: 'gen-cartera',
+    type: 'conceptNode',
+    position: { x: -550, y: -540 },
     data: {
-      id: 'princ-5-holistico',
-      title: '5. Pensar y Trabajar Holísticamente',
-      subtitle: 'Considerar el sistema completo como un todo',
-      branch: 'principios',
-      branchLabel: '3. 7 Principios ITIL',
-      iconName: 'Network',
-      summary: 'Ver la organización como un todo integrando personas, procesos, tecnología y socios (las 4 dimensiones de ITIL 4).',
-      tags: ['Holístico', '4 Dimensiones', 'Flujos E2E'],
-      accentColor: '#d97706',
-      badge: 'Principio 5'
+      id: 'gen-cartera',
+      title: 'Gestión de Cartera (Portfolio)',
+      subtitle: 'Inversiones, Pipeline y Catálogo de Servicios',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
+      iconName: 'Target',
+      summary: 'Gestiona inversiones, servicios y proyectos para maximizar el valor. Controla el Pipeline de propuestas, el Catálogo activo y los servicios retirados.',
+      tags: ['Portfolio', 'Inversión', 'Pipeline', 'ROI'],
+      accentColor: '#059669',
+      badge: 'Retorno de Valor'
     }
   },
   {
-    id: 'princ-6-simple',
-    type: 'stepNode',
-    position: { x: -760, y: 970 },
+    id: 'gen-proyectos',
+    type: 'conceptNode',
+    position: { x: -550, y: -280 },
     data: {
-      id: 'princ-6-simple',
-      title: '6. Mantenerlo Simple y Práctico',
-      subtitle: 'Evitar complejidad y aplicar solo lo útil',
-      branch: 'principios',
-      branchLabel: '3. 7 Principios ITIL',
-      iconName: 'SlidersHorizontal',
-      summary: 'Evitar la complejidad innecesaria; aplicar solo lo que aporte valor. Si un proceso o reporte no genera utilidad, eliminarlo (Lean IT).',
-      tags: ['Simplicidad', 'Lean IT', 'Mínimo Esfuerzo'],
-      accentColor: '#d97706',
-      badge: 'Principio 6'
+      id: 'gen-proyectos',
+      title: 'Gestión de Proyectos',
+      subtitle: 'Planificación, Supervisión y Control',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
+      iconName: 'Workflow',
+      summary: 'Planifica, supervisa y controla los proyectos de TI y negocio cumpliendo alcance, tiempo, costo y calidad mediante metodologías híbridas (PMBOK + Scrum).',
+      tags: ['Proyectos', 'PMBOK', 'Scrum', 'Control'],
+      accentColor: '#059669',
+      badge: 'Entrega a Tiempo'
     }
   },
   {
-    id: 'princ-7-optimizar',
-    type: 'stepNode',
-    position: { x: -760, y: 680 },
+    id: 'gen-financiera',
+    type: 'conceptNode',
+    position: { x: -550, y: -20 },
     data: {
-      id: 'princ-7-optimizar',
-      title: '7. Optimizar y Automatizar',
-      subtitle: 'Mejorar procesos antes de automatizarlos',
-      branch: 'principios',
-      branchLabel: '3. 7 Principios ITIL',
-      iconName: 'Zap',
-      summary: 'Optimizar y simplificar los procesos antes de automatizarlos para ganar eficiencia, reducir errores y liberar talento humano.',
-      tags: ['Automatización', 'Eficiencia', 'Estandarización'],
-      accentColor: '#d97706',
-      badge: 'Principio 7'
+      id: 'gen-financiera',
+      title: 'Gestión Financiera del Servicio',
+      subtitle: 'Presupuestos, Costos (CapEx/OpEx) y FinOps',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
+      iconName: 'TrendingUp',
+      summary: 'Controla presupuestos, costos y retornos relacionados con los servicios de TI. Calcula el Costo Total de Propiedad (TCO) y optimiza costos en la nube.',
+      tags: ['Finanzas', 'CapEx', 'OpEx', 'FinOps', 'TCO'],
+      accentColor: '#059669',
+      badge: 'Eficiencia de Costos'
+    }
+  },
+  {
+    id: 'gen-relaciones',
+    type: 'conceptNode',
+    position: { x: -1100, y: -160 },
+    data: {
+      id: 'gen-relaciones',
+      title: 'Gestión de Relaciones (BRM)',
+      subtitle: 'Vínculos Productivos con Clientes y Stakeholders',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
+      iconName: 'Users',
+      summary: 'Desarrolla relaciones productivas con clientes y partes interesadas, facilitando la comprensión empática de prioridades de negocio y satisfacción.',
+      tags: ['BRM', 'Clientes', 'Satisfacción', 'Stakeholders'],
+      accentColor: '#059669',
+      badge: 'Alianza Estratégica'
+    }
+  },
+  {
+    id: 'gen-riesgos',
+    type: 'stepNode',
+    position: { x: -1100, y: 100 },
+    data: {
+      id: 'gen-riesgos',
+      title: 'Gestión de Riesgos (ISO 31000)',
+      subtitle: 'Matriz 5x5: Gross, Net y Target Risk',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
+      iconName: 'ShieldAlert',
+      summary: 'Identifica, evalúa y mitiga riesgos mediante matrices de calor 5x5 (Low, Moderate, High, Extreme). Reduce el Gross Risk hacia el Target Risk deseado.',
+      tags: ['Riesgos', 'ISO 31000', 'Matriz 5x5', 'Heatmap'],
+      accentColor: '#059669',
+      badge: 'Control de Riesgos'
+    }
+  },
+  {
+    id: 'gen-proveedores',
+    type: 'conceptNode',
+    position: { x: -650, y: 240 },
+    data: {
+      id: 'gen-proveedores',
+      title: 'Gestión de Proveedores',
+      subtitle: 'Contratos de Soporte (UCs) y Acuerdos de Nivel',
+      branch: 'generales',
+      branchLabel: '1. Prácticas Generales ITIL',
+      iconName: 'ListChecks',
+      summary: 'Garantiza que los proveedores externos (cloud vendors, telecomunicaciones, software) cumplan con los acuerdos establecidos y contratos de soporte (UCs).',
+      tags: ['Proveedores', 'Vendors', 'Underpinning Contracts', 'Cloud'],
+      accentColor: '#059669',
+      badge: 'Gestión Externa'
     }
   },
 
-  // ================= RAMA 4: PRÁCTICA Y CASOS DE APLICACIÓN (Inferior Derecha) =================
+  // ================= RAMA 2: PRÁCTICAS TÉCNICAS Y DESPLIEGUE (Superior Derecha) =================
+  {
+    id: 'branch-tecnicas',
+    type: 'branchNode',
+    position: { x: 950, y: -450 },
+    data: {
+      id: 'branch-tecnicas',
+      title: 'PRÁCTICAS DE GESTIÓN TÉCNICA & DESPLIEGUE',
+      subtitle: 'Capacidades Técnicas para Mantener y Desarrollar los Servicios',
+      branch: 'tecnicas',
+      branchLabel: '2. Prácticas Técnicas y Despliegue',
+      iconName: 'Cpu',
+      summary: 'Cubren las capacidades de ingeniería de infraestructura, redes redundantes, almacenamiento RAID, desarrollo de software y automatización CI/CD.',
+      tags: ['Despliegues', 'CI/CD', 'Infraestructura', 'RAID', 'Redes', 'App Web'],
+      accentColor: '#2563eb',
+      badge: 'Ingeniería & Operaciones'
+    }
+  },
+  {
+    id: 'tec-despliegues',
+    type: 'stepNode',
+    position: { x: 550, y: -800 },
+    data: {
+      id: 'tec-despliegues',
+      title: 'Gestión de Despliegues',
+      subtitle: 'Distribución Segura de Software y Hardware',
+      branch: 'tecnicas',
+      branchLabel: '2. Prácticas Técnicas y Despliegue',
+      iconName: 'Rocket',
+      summary: 'Planifica y ejecuta la distribución de software o hardware en entornos operativos utilizando estrategias como Blue-Green, Canary y Rollbacks controlados.',
+      tags: ['Despliegues', 'Deployment', 'Blue-Green', 'Rollback'],
+      accentColor: '#2563eb',
+      badge: 'Distribución Ágil'
+    }
+  },
+  {
+    id: 'tec-cicd-pipeline',
+    type: 'stepNode',
+    position: { x: 1050, y: -850 },
+    data: {
+      id: 'tec-cicd-pipeline',
+      title: 'Pipeline CI/CD Automatizado',
+      subtitle: 'Commit ➔ Build ➔ Test ➔ Artifact ➔ Deploy ➔ Monitoring',
+      branch: 'tecnicas',
+      branchLabel: '2. Prácticas Técnicas y Despliegue',
+      iconName: 'Zap',
+      summary: 'Flujo moderno de integración y entrega continua con herramientas líderes (Docker, Jenkins, ArgoCD, CodePipeline, Kubernetes) para acelerar valor.',
+      tags: ['CI/CD', 'Docker', 'Kubernetes', 'Automatización'],
+      accentColor: '#2563eb',
+      badge: 'Flujo DevOps'
+    }
+  },
+  {
+    id: 'tec-infraestructura',
+    type: 'conceptNode',
+    position: { x: 1550, y: -800 },
+    data: {
+      id: 'tec-infraestructura',
+      title: 'Infraestructura y Plataforma',
+      subtitle: 'Centros de Cómputo ISO/IEC 22237 & Cloud',
+      branch: 'tecnicas',
+      branchLabel: '2. Prácticas Técnicas y Despliegue',
+      iconName: 'Server',
+      summary: 'Administra los entornos tecnológicos donde se ejecutan los servicios (servidores, clusters, virtualización y nubes públicas como AWS u Oracle Cloud).',
+      tags: ['Infraestructura', 'Data Center', 'ISO 22237', 'Cloud'],
+      accentColor: '#2563eb',
+      badge: 'Base Operacional'
+    }
+  },
+  {
+    id: 'tec-alta-disp-raid',
+    type: 'conceptNode',
+    position: { x: 1550, y: -540 },
+    data: {
+      id: 'tec-alta-disp-raid',
+      title: 'Alta Disponibilidad & RAID',
+      subtitle: 'RAID 0, RAID 1 y RAID 01 (0+1) en Almacenamiento',
+      branch: 'tecnicas',
+      branchLabel: '2. Prácticas Técnicas y Despliegue',
+      iconName: 'Database',
+      summary: 'Arreglos de discos para tolerancia a fallas: fraccionamiento (RAID 0), espejo (RAID 1) y combinados (RAID 0+1) para proteger datos críticos.',
+      tags: ['RAID', 'Almacenamiento', 'Tolerancia a Fallas', 'Discos'],
+      accentColor: '#2563eb',
+      badge: 'Resiliencia de Datos'
+    }
+  },
+  {
+    id: 'tec-redes-cloud',
+    type: 'conceptNode',
+    position: { x: 1550, y: -280 },
+    data: {
+      id: 'tec-redes-cloud',
+      title: 'Redes & Conectividad Cloud',
+      subtitle: 'OSPF, EIGRP, SD-WAN MPLS L2 y Cloud Peering',
+      branch: 'tecnicas',
+      branchLabel: '2. Prácticas Técnicas y Despliegue',
+      iconName: 'Network',
+      summary: 'Conectividad empresarial de alta disponibilidad con protocolos dinámicos de enrutamiento (OSPF, EIGRP), HSRP/EtherChannel y canales Cloud Peering hacia AWS y Oracle.',
+      tags: ['Redes', 'OSPF', 'SD-WAN', 'Cloud Peering', 'AWS', 'Oracle'],
+      accentColor: '#2563eb',
+      badge: 'Topología Redundante'
+    }
+  },
+  {
+    id: 'tec-desarrollo-sw',
+    type: 'conceptNode',
+    position: { x: 550, y: -540 },
+    data: {
+      id: 'tec-desarrollo-sw',
+      title: 'Desarrollo y Gestión de Software',
+      subtitle: 'Diseño, Construcción, Pruebas y Mantenimiento',
+      branch: 'tecnicas',
+      branchLabel: '2. Prácticas Técnicas y Despliegue',
+      iconName: 'Code',
+      summary: 'Diseña, construye, prueba y mantiene aplicaciones con altos estándares de código limpio, pruebas de seguridad SAST/DAST y mantenibilidad.',
+      tags: ['Software', 'Desarrollo', 'Pruebas', 'Código Limpio'],
+      accentColor: '#2563eb',
+      badge: 'Ingeniería de SW'
+    }
+  },
+  {
+    id: 'tec-anatomia-web',
+    type: 'conceptNode',
+    position: { x: 550, y: -280 },
+    data: {
+      id: 'tec-anatomia-web',
+      title: 'Anatomía de una App Web Moderna',
+      subtitle: 'FrontEnd, API, BackEnd, Base de Datos y Hosting',
+      branch: 'tecnicas',
+      branchLabel: '2. Prácticas Técnicas y Despliegue',
+      iconName: 'Globe',
+      summary: 'Estructura por capas: FrontEnd (React/Vue/JS), API REST/GraphQL, BackEnd (Node/Python/Go/.NET), Bases de Datos SQL/NoSQL y Hosting multicloud.',
+      tags: ['App Web', 'Frontend', 'Backend', 'API', 'Cloud'],
+      accentColor: '#2563eb',
+      badge: 'Stack Tecnológico'
+    }
+  },
+  {
+    id: 'tec-metafora-culinaria',
+    type: 'stepNode',
+    position: { x: 650, y: -20 },
+    data: {
+      id: 'tec-metafora-culinaria',
+      title: 'Metáfora Culinaria de la Web',
+      subtitle: 'Cocina (Backend) · Salón (Frontend) · Mozo (API) · Food Truck (Fullstack)',
+      branch: 'tecnicas',
+      branchLabel: '2. Prácticas Técnicas y Despliegue',
+      iconName: 'Activity',
+      summary: 'Analogía pedagógica de la sesión 13: la Cocina procesa la lógica, el Salón recibe a los clientes, el Mozo traslada datos y el Food Truck ofrece el servicio completo.',
+      tags: ['Metáfora Culinaria', 'Backend', 'Frontend', 'API', 'Fullstack'],
+      accentColor: '#2563eb',
+      badge: 'Pedagogía UTP'
+    }
+  },
+
+  // ================= RAMA 3: ESQUEMA DE CERTIFICACIÓN ITIL & GOBERNANZA (Inferior Izquierda) =================
+  {
+    id: 'branch-certificacion',
+    type: 'branchNode',
+    position: { x: -950, y: 550 },
+    data: {
+      id: 'branch-certificacion',
+      title: 'ESQUEMA DE CERTIFICACIÓN ITIL & GOBERNANZA',
+      subtitle: 'Estándar Internacional ITSM, Costos PeopleCert y Marcos Globales',
+      branch: 'certificacion',
+      branchLabel: '3. Certificación ITIL & Estándares',
+      iconName: 'Award',
+      summary: 'Valida competencias en gestión de servicios de TI reconocidas globalmente. Detalla los costos de certificación oficial y su integración con COBIT e ISO.',
+      tags: ['Certificación', 'PeopleCert', 'ATO', 'Costos', 'COBIT', 'ISO 20000'],
+      accentColor: '#d97706',
+      badge: 'Acreditación Global'
+    }
+  },
+  {
+    id: 'cert-importancia-itil',
+    type: 'conceptNode',
+    position: { x: -1550, y: 400 },
+    data: {
+      id: 'cert-importancia-itil',
+      title: 'Importancia de la Certificación ITIL',
+      subtitle: 'Alineación Estratégica, Calidad y Eficiencia',
+      branch: 'certificacion',
+      branchLabel: '3. Certificación ITIL & Estándares',
+      iconName: 'CheckCircle2',
+      summary: 'Estándar internacional de gestión de servicios (ITSM) que alinea la tecnología con las necesidades del negocio, optimizando calidad, eficiencia y valor.',
+      tags: ['Importancia', 'ITSM', 'Estándar', 'Valor'],
+      accentColor: '#d97706',
+      badge: 'Estándar de Oro'
+    }
+  },
+  {
+    id: 'cert-costos-stats',
+    type: 'stepNode',
+    position: { x: -1550, y: 680 },
+    data: {
+      id: 'cert-costos-stats',
+      title: 'Costos de Certificación ITIL',
+      subtitle: 'Autodidacta ($680 - $865) vs. Curso ATO ($500 - $2,500)',
+      branch: 'certificacion',
+      branchLabel: '3. Certificación ITIL & Estándares',
+      iconName: 'Calculator',
+      summary: 'Datos estadísticos oficiales de PeopleCert y ATOs: examen supervisado directo ($680-$865) o cursos con capacitación acreditada ($500-$2,500).',
+      tags: ['Costos', 'PeopleCert', 'ATO', 'Estadísticas', 'Examen'],
+      accentColor: '#d97706',
+      badge: 'Inversión Real'
+    }
+  },
+  {
+    id: 'cert-cuatro-dimensiones',
+    type: 'conceptNode',
+    position: { x: -1550, y: 960 },
+    data: {
+      id: 'cert-cuatro-dimensiones',
+      title: 'Las 4 Dimensiones de ITIL 4',
+      subtitle: 'Organización, Tecnología, Socios y Flujos de Valor',
+      branch: 'certificacion',
+      branchLabel: '3. Certificación ITIL & Estándares',
+      iconName: 'Compass',
+      summary: 'Cuatro pilares holísticos para la gestión equilibrada de servicios: Organizaciones y personas, Información y tecnología, Socios y proveedores, y Flujos de valor.',
+      tags: ['4 Dimensiones', 'Personas', 'Tecnología', 'Socios', 'Procesos'],
+      accentColor: '#d97706',
+      badge: 'Enfoque Holístico'
+    }
+  },
+  {
+    id: 'cert-cobit-gobierno',
+    type: 'conceptNode',
+    position: { x: -550, y: 400 },
+    data: {
+      id: 'cert-cobit-gobierno',
+      title: 'COBIT 2019: Gobierno de TI',
+      subtitle: 'EDM: Evaluar, Dirigir y Monitorear',
+      branch: 'certificacion',
+      branchLabel: '3. Certificación ITIL & Estándares',
+      iconName: 'Scale',
+      summary: 'Marco de gobierno empresarial de ISACA que complementa a ITIL distinguiendo claramente el Gobierno corporativo (EDM) de la Gestión operativa (PBRM).',
+      tags: ['COBIT 2019', 'Gobierno de TI', 'ISACA', 'EDM'],
+      accentColor: '#d97706',
+      badge: 'Gobierno Directivo'
+    }
+  },
+  {
+    id: 'cert-iso-20000',
+    type: 'conceptNode',
+    position: { x: -550, y: 680 },
+    data: {
+      id: 'cert-iso-20000',
+      title: 'ISO/IEC 20000: Norma Certificable',
+      subtitle: 'Sistema de Gestión de Servicios de TI (SGSTI)',
+      branch: 'certificacion',
+      branchLabel: '3. Certificación ITIL & Estándares',
+      iconName: 'Award',
+      summary: 'Norma formal internacional para certificar a organizaciones completas en la entrega de servicios de TI confiables, alineada con la estructura de alto nivel ISO.',
+      tags: ['ISO 20000', 'SGSTI', 'Auditoría', 'Certificable'],
+      accentColor: '#d97706',
+      badge: 'Certificación Org'
+    }
+  },
+  {
+    id: 'cert-iso-datacenter',
+    type: 'conceptNode',
+    position: { x: -550, y: 960 },
+    data: {
+      id: 'cert-iso-datacenter',
+      title: 'ISO/IEC 22237 & ISO 31000',
+      subtitle: 'Infraestructura Data Center & Gestión de Riesgos',
+      branch: 'certificacion',
+      branchLabel: '3. Certificación ITIL & Estándares',
+      iconName: 'Server',
+      summary: 'Normas internacionales para diseño redundante de instalaciones de centros de datos (ISO 22237) y directrices universales de tratamiento de riesgos (ISO 31000).',
+      tags: ['ISO 22237', 'Data Center', 'ISO 31000', 'Riesgos'],
+      accentColor: '#d97706',
+      badge: 'Normativa Técnica'
+    }
+  },
+  {
+    id: 'cert-video-intro',
+    type: 'detailNode',
+    position: { x: -1050, y: 950 },
+    data: {
+      id: 'cert-video-intro',
+      title: 'Video Formativo: Certificación ITIL',
+      subtitle: 'YouTube Shorts formativo y debate participativo',
+      branch: 'certificacion',
+      branchLabel: '3. Certificación ITIL & Estándares',
+      iconName: 'Zap',
+      summary: 'Cápsula audiovisual (https://www.youtube.com/shorts/h5K4frTL8as) que motiva la participación en clase respondiendo: "¿Por qué certificarse en ITIL?".',
+      tags: ['Video', 'YouTube', 'Dinámica', 'Participación'],
+      accentColor: '#d97706',
+      badge: 'Recurso Multimedia'
+    }
+  },
+
+  // ================= RAMA 4: PRÁCTICA Y CASOS DE APLICACIÓN UTP (Inferior Derecha) =================
   {
     id: 'branch-practica',
     type: 'branchNode',
-    position: { x: 950, y: 340 },
+    position: { x: 950, y: 550 },
     data: {
       id: 'branch-practica',
-      title: 'CASOS PRÁCTICOS Y PREGUNTAS RETADORAS',
-      subtitle: 'Resolución de Casos de Sesión UTP y Demostración de Logro',
+      title: 'PRÁCTICA Y CASOS DE APLICACIÓN UTP',
+      subtitle: 'Resolución de Casos de Sesión 13, PDCA y Avance de Proyecto',
       branch: 'practica',
       branchLabel: '4. Casos Prácticos UTP',
       iconName: 'Award',
-      summary: 'Actividades aplicadas para transformar la demanda en valor: arquitectura web con base de datos, cuadro comparativo de principios y mapa mental.',
-      tags: ['Casos UTP', 'Web + BD', 'Matriz SVS', 'Logro Sesión'],
+      summary: 'Actividades académicas de la sesión: Caso 01 (práctica aplicada de gestión), Caso 02 (mapa conceptual interactivo) y Caso 03 (Capítulo III del proyecto).',
+      tags: ['Caso 01', 'Caso 02', 'Caso 03', 'PDCA', 'Capítulo III'],
       accentColor: '#7c3aed',
-      badge: 'Aplicación Práctica'
+      badge: 'Evaluación y Práctica'
     }
   },
   {
-    id: 'prac-retadora',
-    type: 'conceptNode',
-    position: { x: 520, y: 330 },
+    id: 'prac-caso-01',
+    type: 'stepNode',
+    position: { x: 550, y: 400 },
     data: {
-      id: 'prac-retadora',
-      title: 'Pregunta Retadora de Sesión',
-      subtitle: '¿Cómo aplicaría usted la gestión de servicios?',
+      id: 'prac-caso-01',
+      title: 'Caso 01: Caso Práctico de Servicios',
+      subtitle: 'Aplicar una Práctica de Gestión en una Empresa',
       branch: 'practica',
       branchLabel: '4. Casos Prácticos UTP',
-      iconName: 'HelpCircle',
-      summary: 'Reflexión inicial: cómo conectar la tecnología y la infraestructura con la experiencia del cliente y la rentabilidad del negocio.',
-      tags: ['Pregunta Retadora', 'Estrategia', 'Alineación'],
+      iconName: 'FileCheck',
+      summary: 'Elaborar un caso práctico donde se considere y resuelva un problema organizacional mediante una práctica de gestión (ej. Despliegues, Seguridad o Riesgos).',
+      tags: ['Caso 01', 'Práctica Aplicada', 'Despliegues', 'Solución'],
       accentColor: '#7c3aed',
-      badge: 'Reflexión'
+      badge: 'Actividad 1'
     }
   },
   {
-    id: 'prac-caso-1',
-    type: 'conceptNode',
-    position: { x: 1390, y: 330 },
+    id: 'prac-caso-02',
+    type: 'stepNode',
+    position: { x: 1550, y: 400 },
     data: {
-      id: 'prac-caso-1',
-      title: 'Caso 01: Sistema Web con BD que Genera Valor',
-      subtitle: 'Arquitectura Cloud / On-Premise con Utilidad y Garantía',
+      id: 'prac-caso-02',
+      title: 'Caso 02: Mapa Conceptual Interactivo',
+      subtitle: 'Síntesis Estructurada de la Sesión 13',
       branch: 'practica',
       branchLabel: '4. Casos Prácticos UTP',
-      iconName: 'Globe',
-      summary: 'Diseño práctico de un sistema web (ej. portal de servicios universitarios o transaccional) con DBMS optimizado que entrega valor directo a usuarios.',
-      tags: ['Caso 01', 'Sistema Web', 'Database', 'Utilidad/Garantía'],
+      iconName: 'Workflow',
+      summary: 'Elaborar un mapa conceptual o mental de la sesión articulando prácticas ITIL, esquema de certificación PeopleCert, normas ISO y el ciclo PDCA.',
+      tags: ['Caso 02', 'Mapa Conceptual', 'Síntesis', 'UTP S13'],
       accentColor: '#7c3aed',
-      badge: 'Caso Práctico 1'
+      badge: 'Actividad 2'
     }
   },
   {
-    id: 'prac-caso-2',
-    type: 'conceptNode',
-    position: { x: 680, y: 690 },
+    id: 'prac-caso-03',
+    type: 'stepNode',
+    position: { x: 550, y: 720 },
     data: {
-      id: 'prac-caso-2',
-      title: 'Caso 02: Cuadro Comparativo de Principios',
-      subtitle: 'Matriz analítica de los 7 principios de la guía del SVS',
+      id: 'prac-caso-03',
+      title: 'Caso 03: Presentar Capítulo III Proyecto',
+      subtitle: 'Sustentación del Avance del Proyecto Integrador',
       branch: 'practica',
       branchLabel: '4. Casos Prácticos UTP',
       iconName: 'FileSpreadsheet',
-      summary: 'Elaboración del cuadro comparativo solicitado en clase: objetivo, beneficios concretos, riesgos de omisión y relación con marcos ágiles.',
-      tags: ['Caso 02', 'Cuadro Comparativo', 'Matriz SVS'],
+      summary: 'Presentar formalmente el Capítulo III del avance del proyecto: arquitectura de servicios de TI, diseño de SLAs, catálogo y matriz de riesgos bajo ISO 31000.',
+      tags: ['Caso 03', 'Proyecto', 'Capítulo III', 'Sustentación'],
       accentColor: '#7c3aed',
-      badge: 'Caso Práctico 2'
+      badge: 'Actividad 3'
     }
   },
   {
-    id: 'prac-caso-3',
+    id: 'prac-ciclo-pdca',
     type: 'conceptNode',
-    position: { x: 1220, y: 690 },
+    position: { x: 1550, y: 720 },
     data: {
-      id: 'prac-caso-3',
-      title: 'Caso 03: Mapa Conceptual de la Sesión',
-      subtitle: 'Síntesis sistémica interactiva de la Semana 11 - Sesión 1',
+      id: 'prac-ciclo-pdca',
+      title: 'Ciclo PDCA en la Práctica',
+      subtitle: 'Planificar ➔ Hacer ➔ Verificar ➔ Actuar',
       branch: 'practica',
       branchLabel: '4. Casos Prácticos UTP',
-      iconName: 'Boxes',
-      summary: 'Construcción del mapa mental y conceptual de la sesión, integrando Valor, Arquetipos, SVS de ITIL 4 y Principios Rectores.',
-      tags: ['Caso 03', 'Mapa Mental', 'Síntesis Sesión'],
+      iconName: 'RotateCw',
+      summary: 'Las cuatro preguntas clave de la sesión: ¿Qué y cómo hacerlo? (Plan), Hacerlo (Do), ¿Pasó según lo previsto? (Check) y ¿Cómo mejorar la próxima vez? (Act).',
+      tags: ['PDCA', 'Deming', 'Mejora Continua', 'Ciclo Calidad'],
       accentColor: '#7c3aed',
-      badge: 'Caso Práctico 3'
+      badge: 'Rueda de Deming'
+    }
+  },
+  {
+    id: 'prac-problem-solution',
+    type: 'conceptNode',
+    position: { x: 1050, y: 950 },
+    data: {
+      id: 'prac-problem-solution',
+      title: 'Enfoque Problem-Solution & Calidad',
+      subtitle: 'Sinergia ITSM, Calidad y DevOps',
+      branch: 'practica',
+      branchLabel: '4. Casos Prácticos UTP',
+      iconName: 'Target',
+      summary: 'Conversión estructurada de problemas en soluciones sostenibles con calidad garantizada, apalancando la agilidad de DevOps con la gobernanza de ITIL.',
+      tags: ['Problem', 'Solution', 'Quality', 'DevOps', 'ITSM'],
+      accentColor: '#7c3aed',
+      badge: 'Excelencia ITSM'
     }
   }
 ];
 
-// ================= EDGES / CONEXIONES CONCEPTUALES =================
+// Aristas de conexión estructuradas y con estilo diferenciado por rama
 export const INITIAL_EDGES: Edge[] = [
-  // ================= CONEXIONES NUCLEARES (CENTRAL A LAS 4 RAMAS) =================
+  // ================= CONEXIONES DESDE EL NODO CENTRAL =================
   {
-    id: 'edge-central-valor',
+    id: 'edge-central-generales',
     source: 'central-node',
-    target: 'branch-valor',
+    target: 'branch-generales',
     sourceHandle: 'left',
     targetHandle: 'right',
-    label: 'Fundamenta y Define',
-    type: 'smoothstep',
     animated: true,
-    style: { stroke: '#059669', strokeWidth: 2.5 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
+    style: { stroke: '#059669', strokeWidth: 3 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669', width: 18, height: 18 }
   },
   {
-    id: 'edge-central-svs',
+    id: 'edge-central-tecnicas',
     source: 'central-node',
-    target: 'branch-svs',
+    target: 'branch-tecnicas',
     sourceHandle: 'right',
     targetHandle: 'left',
-    label: 'Arquitectura Operativa',
-    type: 'smoothstep',
     animated: true,
-    style: { stroke: '#2563eb', strokeWidth: 2.5 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
+    style: { stroke: '#2563eb', strokeWidth: 3 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb', width: 18, height: 18 }
   },
   {
-    id: 'edge-central-principios',
+    id: 'edge-central-certificacion',
     source: 'central-node',
-    target: 'branch-principios',
+    target: 'branch-certificacion',
     sourceHandle: 'bottom',
     targetHandle: 'top',
-    label: 'Guías de Decisión',
-    type: 'smoothstep',
     animated: true,
-    style: { stroke: '#d97706', strokeWidth: 2.5 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
+    style: { stroke: '#d97706', strokeWidth: 3 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706', width: 18, height: 18 }
   },
   {
     id: 'edge-central-practica',
@@ -516,394 +700,342 @@ export const INITIAL_EDGES: Edge[] = [
     target: 'branch-practica',
     sourceHandle: 'bottom',
     targetHandle: 'top',
-    label: 'Aplicación Práctica UTP',
-    type: 'smoothstep',
     animated: true,
-    style: { stroke: '#7c3aed', strokeWidth: 2.5 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#7c3aed' }
+    style: { stroke: '#7c3aed', strokeWidth: 3 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#7c3aed', width: 18, height: 18 }
   },
 
-  // ================= RAMA 1: CONEXIONES DE VALOR Y ARQUETIPOS (VERDE) =================
+  // ================= RAMA 1: CONEXIONES PRÁCTICAS GENERALES ITIL =================
   {
-    id: 'edge-valor-tech',
-    source: 'branch-valor',
-    target: 'val-arquetipos-tech',
-    sourceHandle: 'src-left',
-    targetHandle: 'right',
-    label: 'Soporte Técnico',
-    type: 'smoothstep',
-    style: { stroke: '#059669', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
-  },
-  {
-    id: 'edge-valor-def',
-    source: 'branch-valor',
-    target: 'val-definicion-itil',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: 'Ecuación ITIL',
-    type: 'smoothstep',
-    style: { stroke: '#059669', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
-  },
-  {
-    id: 'edge-valor-porter',
-    source: 'branch-valor',
-    target: 'val-financiero-porter',
-    sourceHandle: 'src-right',
-    targetHandle: 'left',
-    label: 'Enfoque Negocio',
-    type: 'smoothstep',
-    style: { stroke: '#059669', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
-  },
-  {
-    id: 'edge-eq-utilidad',
-    source: 'val-definicion-itil',
-    target: 'val-utilidad',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: '+ Fit for Purpose',
-    type: 'smoothstep',
-    style: { stroke: '#10b981', strokeWidth: 2, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#10b981' }
-  },
-  {
-    id: 'edge-eq-garantia',
-    source: 'val-definicion-itil',
-    target: 'val-garantia',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: '+ Fit for Use',
-    type: 'smoothstep',
-    style: { stroke: '#10b981', strokeWidth: 2, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#10b981' }
-  },
-  {
-    id: 'edge-eq-cocreacion',
-    source: 'val-definicion-itil',
-    target: 'val-cocreacion',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: '= Co-creado',
-    type: 'smoothstep',
-    style: { stroke: '#059669', strokeWidth: 2.5 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
-  },
-  {
-    id: 'edge-tech-def',
-    source: 'val-arquetipos-tech',
-    target: 'val-definicion-itil',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'left',
-    label: 'arquitectura',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#10b981', strokeWidth: 1.5, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#10b981' }
-  },
-
-  // ================= RAMA 2: CONEXIONES DEL SISTEMA SVS (AZUL) =================
-  {
-    id: 'edge-svs-demanda',
-    source: 'branch-svs',
-    target: 'svs-demanda-valor',
-    sourceHandle: 'src-left',
-    targetHandle: 'right',
-    label: 'Insumo y Salida',
-    type: 'smoothstep',
-    style: { stroke: '#2563eb', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
-  },
-  {
-    id: 'edge-svs-gobernanza',
-    source: 'branch-svs',
-    target: 'svs-gobernanza',
-    sourceHandle: 'src-right',
-    targetHandle: 'left',
-    label: 'Control Estratégico',
-    type: 'smoothstep',
-    style: { stroke: '#2563eb', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
-  },
-  {
-    id: 'edge-svs-cadena',
-    source: 'branch-svs',
-    target: 'svs-cadena-valor',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: 'Motor SVC',
-    type: 'smoothstep',
-    style: { stroke: '#2563eb', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
-  },
-  {
-    id: 'edge-svs-practicas',
-    source: 'branch-svs',
-    target: 'svs-practicas-mejora',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: 'Capacidades',
-    type: 'smoothstep',
-    style: { stroke: '#2563eb', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
-  },
-  {
-    id: 'edge-demanda-cadena',
-    source: 'svs-demanda-valor',
-    target: 'svs-cadena-valor',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: 'activa cadena',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#3b82f6', strokeWidth: 2, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#3b82f6' }
-  },
-  {
-    id: 'edge-cadena-practicas',
-    source: 'svs-cadena-valor',
-    target: 'svs-practicas-mejora',
-    sourceHandle: 'src-right',
-    targetHandle: 'left',
-    label: 'ejecuta prácticas',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#3b82f6', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#3b82f6' }
-  },
-
-  // ================= RAMA 3: CONEXIONES DE LOS 7 PRINCIPIOS (ÁMBAR) =================
-  {
-    id: 'edge-princ-1',
-    source: 'branch-principios',
-    target: 'princ-1-valor',
-    sourceHandle: 'src-left',
-    targetHandle: 'right',
-    label: 'P1',
-    type: 'smoothstep',
-    style: { stroke: '#d97706', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
-  },
-  {
-    id: 'edge-princ-2',
-    source: 'branch-principios',
-    target: 'princ-2-donde',
-    sourceHandle: 'src-left',
-    targetHandle: 'right',
-    label: 'P2',
-    type: 'smoothstep',
-    style: { stroke: '#d97706', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
-  },
-  {
-    id: 'edge-princ-3',
-    source: 'branch-principios',
-    target: 'princ-3-iterar',
-    sourceHandle: 'src-left',
-    targetHandle: 'right',
-    label: 'P3',
-    type: 'smoothstep',
-    style: { stroke: '#d97706', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
-  },
-  {
-    id: 'edge-princ-4',
-    source: 'branch-principios',
-    target: 'princ-4-colaborar',
-    sourceHandle: 'src-left',
-    targetHandle: 'right',
-    label: 'P4',
-    type: 'smoothstep',
-    style: { stroke: '#d97706', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
-  },
-  {
-    id: 'edge-princ-5',
-    source: 'branch-principios',
-    target: 'princ-5-holistico',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: 'P5',
-    type: 'smoothstep',
-    style: { stroke: '#d97706', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
-  },
-  {
-    id: 'edge-princ-6',
-    source: 'branch-principios',
-    target: 'princ-6-simple',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: 'P6',
-    type: 'smoothstep',
-    style: { stroke: '#d97706', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
-  },
-  {
-    id: 'edge-princ-7',
-    source: 'branch-principios',
-    target: 'princ-7-optimizar',
-    sourceHandle: 'src-right',
-    targetHandle: 'left',
-    label: 'P7',
-    type: 'smoothstep',
-    style: { stroke: '#d97706', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
-  },
-  // Conexiones sinérgicas del ciclo de principios
-  {
-    id: 'edge-p1-p2',
-    source: 'princ-1-valor',
-    target: 'princ-2-donde',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: 'diagnóstico',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#f59e0b', strokeWidth: 1.5, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#f59e0b' }
-  },
-  {
-    id: 'edge-p2-p3',
-    source: 'princ-2-donde',
-    target: 'princ-3-iterar',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: 'iterar',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#f59e0b', strokeWidth: 1.5, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#f59e0b' }
-  },
-  {
-    id: 'edge-p3-p4',
-    source: 'princ-3-iterar',
-    target: 'princ-4-colaborar',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: 'feedback',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#f59e0b', strokeWidth: 1.5, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#f59e0b' }
-  },
-  {
-    id: 'edge-p4-p5',
-    source: 'princ-4-colaborar',
-    target: 'princ-5-holistico',
-    sourceHandle: 'src-right',
-    targetHandle: 'left',
-    label: 'visión holística',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#f59e0b', strokeWidth: 1.5, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#f59e0b' }
-  },
-  {
-    id: 'edge-p5-p6',
-    source: 'princ-5-holistico',
-    target: 'princ-6-simple',
-    sourceHandle: 'src-right',
-    targetHandle: 'left',
-    label: 'simplificar',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#f59e0b', strokeWidth: 1.5, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#f59e0b' }
-  },
-  {
-    id: 'edge-p6-p7',
-    source: 'princ-6-simple',
-    target: 'princ-7-optimizar',
+    id: 'edge-gen-mejora',
+    source: 'branch-generales',
+    target: 'gen-mejora-continua',
     sourceHandle: 'src-top',
     targetHandle: 'bottom',
-    label: 'luego automatizar',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#f59e0b', strokeWidth: 1.5, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#f59e0b' }
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
   },
-
-  // ================= RAMA 4: CONEXIONES DE PRÁCTICA Y CASOS (VIOLETA) =================
   {
-    id: 'edge-prac-retadora',
-    source: 'branch-practica',
-    target: 'prac-retadora',
+    id: 'edge-gen-arq',
+    source: 'branch-generales',
+    target: 'gen-arquitectura',
+    sourceHandle: 'src-top',
+    targetHandle: 'bottom',
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
+  },
+  {
+    id: 'edge-gen-seg',
+    source: 'branch-generales',
+    target: 'gen-seguridad',
+    sourceHandle: 'src-top',
+    targetHandle: 'bottom',
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
+  },
+  {
+    id: 'edge-gen-conoc',
+    source: 'branch-generales',
+    target: 'gen-conocimiento',
     sourceHandle: 'src-left',
     targetHandle: 'right',
-    label: 'Reflexión',
-    type: 'smoothstep',
-    style: { stroke: '#7c3aed', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#7c3aed' }
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
   },
+  {
+    id: 'edge-gen-med',
+    source: 'branch-generales',
+    target: 'gen-medicion-reporte',
+    sourceHandle: 'src-left',
+    targetHandle: 'right',
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
+  },
+  {
+    id: 'edge-gen-cambio',
+    source: 'branch-generales',
+    target: 'gen-cambio-org',
+    sourceHandle: 'src-left',
+    targetHandle: 'right',
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
+  },
+  {
+    id: 'edge-gen-cart',
+    source: 'branch-generales',
+    target: 'gen-cartera',
+    sourceHandle: 'src-right',
+    targetHandle: 'left',
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
+  },
+  {
+    id: 'edge-gen-proy',
+    source: 'branch-generales',
+    target: 'gen-proyectos',
+    sourceHandle: 'src-right',
+    targetHandle: 'left',
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
+  },
+  {
+    id: 'edge-gen-fin',
+    source: 'branch-generales',
+    target: 'gen-financiera',
+    sourceHandle: 'src-right',
+    targetHandle: 'left',
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
+  },
+  {
+    id: 'edge-gen-rel',
+    source: 'branch-generales',
+    target: 'gen-relaciones',
+    sourceHandle: 'src-bottom',
+    targetHandle: 'top',
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
+  },
+  {
+    id: 'edge-gen-riesg',
+    source: 'branch-generales',
+    target: 'gen-riesgos',
+    sourceHandle: 'src-bottom',
+    targetHandle: 'top',
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
+  },
+  {
+    id: 'edge-gen-prov',
+    source: 'branch-generales',
+    target: 'gen-proveedores',
+    sourceHandle: 'src-bottom',
+    targetHandle: 'top',
+    style: { stroke: '#059669', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' }
+  },
+
+  // ================= RAMA 2: CONEXIONES PRÁCTICAS TÉCNICAS Y DESPLIEGUE =================
+  {
+    id: 'edge-tec-despl',
+    source: 'branch-tecnicas',
+    target: 'tec-despliegues',
+    sourceHandle: 'src-top',
+    targetHandle: 'bottom',
+    style: { stroke: '#2563eb', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
+  },
+  {
+    id: 'edge-tec-cicd',
+    source: 'branch-tecnicas',
+    target: 'tec-cicd-pipeline',
+    sourceHandle: 'src-top',
+    targetHandle: 'bottom',
+    style: { stroke: '#2563eb', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
+  },
+  {
+    id: 'edge-tec-infra',
+    source: 'branch-tecnicas',
+    target: 'tec-infraestructura',
+    sourceHandle: 'src-top',
+    targetHandle: 'bottom',
+    style: { stroke: '#2563eb', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
+  },
+  {
+    id: 'edge-tec-raid',
+    source: 'branch-tecnicas',
+    target: 'tec-alta-disp-raid',
+    sourceHandle: 'src-right',
+    targetHandle: 'left',
+    style: { stroke: '#2563eb', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
+  },
+  {
+    id: 'edge-tec-redes',
+    source: 'branch-tecnicas',
+    target: 'tec-redes-cloud',
+    sourceHandle: 'src-right',
+    targetHandle: 'left',
+    style: { stroke: '#2563eb', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
+  },
+  {
+    id: 'edge-tec-sw',
+    source: 'branch-tecnicas',
+    target: 'tec-desarrollo-sw',
+    sourceHandle: 'src-left',
+    targetHandle: 'right',
+    style: { stroke: '#2563eb', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
+  },
+  {
+    id: 'edge-tec-web',
+    source: 'branch-tecnicas',
+    target: 'tec-anatomia-web',
+    sourceHandle: 'src-left',
+    targetHandle: 'right',
+    style: { stroke: '#2563eb', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
+  },
+  {
+    id: 'edge-tec-culinaria',
+    source: 'branch-tecnicas',
+    target: 'tec-metafora-culinaria',
+    sourceHandle: 'src-bottom',
+    targetHandle: 'top',
+    style: { stroke: '#2563eb', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#2563eb' }
+  },
+  // Conexión lógica interna técnica
+  {
+    id: 'edge-logic-deploy-cicd',
+    source: 'tec-despliegues',
+    target: 'tec-cicd-pipeline',
+    sourceHandle: 'src-right',
+    targetHandle: 'left',
+    style: { stroke: '#3b82f6', strokeWidth: 1.5, strokeDasharray: '4 4' },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#3b82f6' }
+  },
+  {
+    id: 'edge-logic-web-culinaria',
+    source: 'tec-anatomia-web',
+    target: 'tec-metafora-culinaria',
+    sourceHandle: 'src-bottom',
+    targetHandle: 'left',
+    style: { stroke: '#3b82f6', strokeWidth: 1.5, strokeDasharray: '4 4' },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#3b82f6' }
+  },
+
+  // ================= RAMA 3: CONEXIONES CERTIFICACIÓN ITIL & GOBERNANZA =================
+  {
+    id: 'edge-cert-imp',
+    source: 'branch-certificacion',
+    target: 'cert-importancia-itil',
+    sourceHandle: 'src-left',
+    targetHandle: 'right',
+    style: { stroke: '#d97706', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
+  },
+  {
+    id: 'edge-cert-cost',
+    source: 'branch-certificacion',
+    target: 'cert-costos-stats',
+    sourceHandle: 'src-left',
+    targetHandle: 'right',
+    style: { stroke: '#d97706', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
+  },
+  {
+    id: 'edge-cert-4dim',
+    source: 'branch-certificacion',
+    target: 'cert-cuatro-dimensiones',
+    sourceHandle: 'src-bottom',
+    targetHandle: 'top',
+    style: { stroke: '#d97706', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
+  },
+  {
+    id: 'edge-cert-cobit',
+    source: 'branch-certificacion',
+    target: 'cert-cobit-gobierno',
+    sourceHandle: 'src-right',
+    targetHandle: 'left',
+    style: { stroke: '#d97706', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
+  },
+  {
+    id: 'edge-cert-iso20k',
+    source: 'branch-certificacion',
+    target: 'cert-iso-20000',
+    sourceHandle: 'src-right',
+    targetHandle: 'left',
+    style: { stroke: '#d97706', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
+  },
+  {
+    id: 'edge-cert-isodc',
+    source: 'branch-certificacion',
+    target: 'cert-iso-datacenter',
+    sourceHandle: 'src-bottom',
+    targetHandle: 'top',
+    style: { stroke: '#d97706', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
+  },
+  {
+    id: 'edge-cert-video',
+    source: 'branch-certificacion',
+    target: 'cert-video-intro',
+    sourceHandle: 'src-bottom',
+    targetHandle: 'top',
+    style: { stroke: '#d97706', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' }
+  },
+
+  // ================= RAMA 4: CONEXIONES PRÁCTICA Y CASOS UTP =================
   {
     id: 'edge-prac-c1',
     source: 'branch-practica',
-    target: 'prac-caso-1',
-    sourceHandle: 'src-right',
-    targetHandle: 'left',
-    label: 'Caso 01: Web + BD',
-    type: 'smoothstep',
+    target: 'prac-caso-01',
+    sourceHandle: 'src-left',
+    targetHandle: 'right',
     style: { stroke: '#7c3aed', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed, color: '#7c3aed' }
   },
   {
     id: 'edge-prac-c2',
     source: 'branch-practica',
-    target: 'prac-caso-2',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: 'Caso 02: Matriz SVS',
-    type: 'smoothstep',
+    target: 'prac-caso-02',
+    sourceHandle: 'src-right',
+    targetHandle: 'left',
     style: { stroke: '#7c3aed', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed, color: '#7c3aed' }
   },
   {
     id: 'edge-prac-c3',
     source: 'branch-practica',
-    target: 'prac-caso-3',
+    target: 'prac-caso-03',
     sourceHandle: 'src-bottom',
     targetHandle: 'top',
-    label: 'Caso 03: Mapa',
-    type: 'smoothstep',
     style: { stroke: '#7c3aed', strokeWidth: 2 },
     markerEnd: { type: MarkerType.ArrowClosed, color: '#7c3aed' }
   },
   {
-    id: 'edge-retadora-c2',
-    source: 'prac-retadora',
-    target: 'prac-caso-2',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'left',
-    label: 'fundamentado con',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#a855f7', strokeWidth: 1.5, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#a855f7' }
-  },
-  {
-    id: 'edge-c1-c3',
-    source: 'prac-caso-1',
-    target: 'prac-caso-3',
-    sourceHandle: 'src-bottom',
-    targetHandle: 'top',
-    label: 'materializa valor',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#a855f7', strokeWidth: 1.5, strokeDasharray: '4 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#a855f7' }
-  },
-  {
-    id: 'edge-c2-c3',
-    source: 'prac-caso-2',
-    target: 'prac-caso-3',
+    id: 'edge-prac-pdca',
+    source: 'branch-practica',
+    target: 'prac-ciclo-pdca',
     sourceHandle: 'src-right',
     targetHandle: 'left',
-    label: 'síntesis total',
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: '#a855f7', strokeWidth: 2 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#a855f7' }
+    style: { stroke: '#7c3aed', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#7c3aed' }
+  },
+  {
+    id: 'edge-prac-prob',
+    source: 'branch-practica',
+    target: 'prac-problem-solution',
+    sourceHandle: 'src-bottom',
+    targetHandle: 'top',
+    style: { stroke: '#7c3aed', strokeWidth: 2 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#7c3aed' }
+  },
+  // Conexión lógica entre casos
+  {
+    id: 'edge-logic-c1-c2',
+    source: 'prac-caso-01',
+    target: 'prac-caso-02',
+    sourceHandle: 'src-right',
+    targetHandle: 'left',
+    style: { stroke: '#8b5cf6', strokeWidth: 1.5, strokeDasharray: '4 4' },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#8b5cf6' }
+  },
+  {
+    id: 'edge-logic-c2-pdca',
+    source: 'prac-caso-02',
+    target: 'prac-ciclo-pdca',
+    sourceHandle: 'src-bottom',
+    targetHandle: 'top',
+    style: { stroke: '#8b5cf6', strokeWidth: 1.5, strokeDasharray: '4 4' },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#8b5cf6' }
   }
 ];

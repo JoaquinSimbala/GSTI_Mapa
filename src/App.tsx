@@ -127,13 +127,15 @@ const FlowCanvas: React.FC = () => {
 
         // Center on the branch root
         const branchRootId =
-          branchId === 'valor'
-            ? 'branch-valor'
-            : branchId === 'svs'
-            ? 'branch-svs'
-            : branchId === 'principios'
-            ? 'branch-principios'
-            : 'branch-practica';
+          branchId === 'generales'
+            ? 'branch-generales'
+            : branchId === 'tecnicas'
+            ? 'branch-tecnicas'
+            : branchId === 'certificacion'
+            ? 'branch-certificacion'
+            : branchId === 'practica'
+            ? 'branch-practica'
+            : `branch-${branchId}`;
         const targetNode = nodes.find((n) => n.id === branchRootId);
         if (targetNode) {
           reactFlow.setCenter(targetNode.position.x + 160, targetNode.position.y + 100, {
@@ -227,11 +229,11 @@ const FlowCanvas: React.FC = () => {
             switch (data.branch) {
               case 'central':
                 return '#4f46e5';
-              case 'valor':
+              case 'generales':
                 return '#059669';
-              case 'svs':
+              case 'tecnicas':
                 return '#2563eb';
-              case 'principios':
+              case 'certificacion':
                 return '#d97706';
               case 'practica':
                 return '#7c3aed';
@@ -255,16 +257,16 @@ const FlowCanvas: React.FC = () => {
           <div className="bottom-legend-card">
             <div className="legend-items">
               <span className="legend-item">
-                <span className="legend-dot" style={{ background: '#4f46e5' }} /> Núcleo SVS
+                <span className="legend-dot" style={{ background: '#4f46e5' }} /> Núcleo S13
               </span>
               <span className="legend-item">
-                <span className="legend-dot" style={{ background: '#059669' }} /> 1. Arquetipos de Valor
+                <span className="legend-dot" style={{ background: '#059669' }} /> 1. Prácticas Generales
               </span>
               <span className="legend-item">
-                <span className="legend-dot" style={{ background: '#2563eb' }} /> 2. Componentes SVS
+                <span className="legend-dot" style={{ background: '#2563eb' }} /> 2. Técnicas & Despliegue
               </span>
               <span className="legend-item">
-                <span className="legend-dot" style={{ background: '#d97706' }} /> 3. 7 Principios ITIL
+                <span className="legend-dot" style={{ background: '#d97706' }} /> 3. Certificación & Estándares
               </span>
               <span className="legend-item">
                 <span className="legend-dot" style={{ background: '#7c3aed' }} /> 4. Casos Prácticos UTP
@@ -272,7 +274,7 @@ const FlowCanvas: React.FC = () => {
             </div>
             <span className="legend-divider">|</span>
             <span className="legend-hint">
-              💡 Haz clic en cualquier concepto para desplegar el análisis completo y simulador
+              💡 Haz clic en cualquier concepto para desplegar el análisis completo y simuladores
             </span>
           </div>
         </Panel>

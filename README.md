@@ -1,31 +1,32 @@
-# Sistema de Valor del Servicio (SVS) - ITIL 4 · Mapa Conceptual Interactivo
+# Prácticas de Gestión ITIL & Esquema de Certificación · Mapa Conceptual Interactivo
 
-Aplicación web interactiva basada en **React Flow** (@xyflow/react) y **Vite** para el aprendizaje, análisis y visualización del **Sistema de Valor del Servicio (SVS) de ITIL 4**, sus componentes, los **7 Principios Rectores** y su aplicación en arquitecturas web y bases de datos (**UTP - Gestión del Servicio de TI · Semana 11, Sesión 1**).
+Aplicación web interactiva basada en **React Flow** (@xyflow/react) y **Vite** para el aprendizaje, análisis y visualización de las **Prácticas de Gestión de ITIL 4**, el **Esquema de Certificación Oficial**, estándares de gobernanza y calidad (**COBIT 2019, ISO/IEC 20000, ISO/IEC 22237, ISO 31000**) y los casos prácticos de la sesión (**UTP - Gestión de Servicios de TI · Semana 13, Sesión 2**).
 
 ## 🚀 Características Principales
 
-- **Grafo Conceptual Interactivo (React Flow)**: Visualización estructurada con conectores animados, jerarquía visual y nodos personalizados de alta legibilidad.
-- **Panel Desplegable Lateral**: Al hacer clic en cualquier concepto, se abre un cajón lateral con fundamentos teóricos detallados, fórmulas, casos prácticos y simuladores interactivos:
-  - **Calculadora de Valor ITIL 4**: Simula la ecuación de Axelos (Utilidad: *Fit for Purpose* + Garantía: *Fit for Use* = Valor Co-Creado).
-  - **Matriz Comparativa de los 7 Principios (Caso 02)**: Propósito, aplicación en desarrollo web/BD, errores comunes a evitar y marcos afines.
-  - **Explorador de Arquitectura de Bases de Datos (Caso 01 & Slide 6)**: Análisis de los tipos de DBMS (SQL, In-Memory, Vector DB, Documental, Columnar, Grafos, NewSQL, etc.) y su valor de servicio.
-  - **6 Actividades de la Cadena de Valor (SVC)**: Planear, Mejorar, Comprometer, Diseñar/Transición, Obtener/Construir, Entregar/Soporte.
+- **Grafo Conceptual Interactivo (React Flow v12)**: Visualización estructurada de 33 nodos con balance espacial, libre de solapamientos, jerarquías visuales y aristas animadas diferenciadas por rama.
+- **Panel Desplegable Lateral**: Al hacer clic en cualquier concepto, se abre un cajón lateral con fundamentos teóricos detallados, fórmulas/métricas, casos prácticos organizacionales y simuladores interactivos:
+  - **Calculadora de Inversión en Certificación ITIL**: Simula costos según datos de la diapositiva 9: modalidad Autodidacta PeopleCert ($680 - $865 por examen) vs. Curso Acreditado ATO ($500 - $2,500 por módulo) con proyección para múltiples participantes y retoma de examen.
+  - **Matriz Interactiva de Riesgos 5x5 (ISO 31000)**: Evaluación dinámica de severidad (1 a 25) según Probabilidad e Impacto, cuadrícula de calor (Low, Moderate, High, Extreme) y distinción de Gross Risk, Net Risk y Target Risk (diapositiva 12).
+  - **Simulador del Ciclo Deming (PDCA)**: Fases operativas Plan, Do, Check y Act con las preguntas guía de la sesión, actividades clave de TI y entregables estandarizados.
+  - **Anatomía Web & Metáfora Culinaria (Diapositivas 11 y 13)**: Backend (Cocina), Frontend (Salón), API (Mozo camarero), Base de Datos (Despensa), Fullstack (Food Truck) y Pipeline CI/CD (Automatización).
 - **Filtros por Eje Temático**: Aislamiento visual e iluminación instantánea para:
-  1. **Arquetipos de Valor**: Ecuación de Axelos (Utilidad + Garantía), Rappaport (1986), Cadena de Porter y arquitectura técnica.
-  2. **Componentes SVS**: Oportunidad/Demanda a Valor, Gobernanza (ISO 38500), Cadena de Valor (SVC) y 34 Prácticas ITIL.
-  3. **7 Principios Rectores de ITIL 4**: Centrarse en el valor, Empezar donde se está, Iterar con feedback, Colaborar y visibilidad, Pensar holísticamente, Mantenerlo simple, y Optimizar y automatizar.
-  4. **Casos Prácticos UTP**: Pregunta retadora, Caso 01 (Sistema Web con BD), Caso 02 (Cuadro comparativo) y Caso 03 (Mapa conceptual).
-- **Búsqueda en Tiempo Real**: Auto-completado con salto y enfoque automático en el mapa.
-- **Tour Guiado**: Modo presentación secuencial que recorre las 5 estaciones maestras del SVS con zoom fluido.
-- **Diseño 100% Responsivo**: Adaptado para dispositivos móviles, tablets y escritorios con estética moderna.
+  1. **Prácticas Generales ITIL (12)**: Gestión de Arquitectura, Mejora Continua (PDCA), Seguridad CIA, Conocimiento, Medición/KPIs, Cambio Organizacional (OCM), Cartera, Proyectos, Finanzas (CapEx/OpEx), Relaciones (BRM), Riesgos (ISO 31000) y Proveedores.
+  2. **Prácticas Técnicas & Despliegue**: Gestión de Despliegues (Blue-Green/Canary/Rollback), Pipeline CI/CD automatizado, Gestión de Infraestructura (ISO/IEC 22237), Arreglos RAID (0, 1, 0+1), Redes OSPF/EIGRP/SD-WAN, Cloud Peering (AWS/Oracle) y Desarrollo de Software.
+  3. **Certificación ITIL & Estándares**: Importancia estratégica en ITSM, datos estadísticos de costos PeopleCert, 4 Dimensiones de ITIL 4, COBIT 2019 (EDM), ISO/IEC 20000 e ISO 22237 / ISO 31000.
+  4. **Casos Prácticos UTP**: Caso 01 (práctica aplicada de servicios), Caso 02 (mapa conceptual interactivo), Caso 03 (Capítulo III del proyecto) y enfoque Problem-Solution-Quality.
+- **Búsqueda en Tiempo Real**: Auto-completado con salto y enfoque automático en el mapa conceptual.
+- **Tour Guiado**: Modo presentación secuencial que recorre las 5 estaciones maestras con zoom y centrado fluido.
+- **Diseño 100% Responsivo**: Adaptado para dispositivos móviles, tablets y monitores de alta resolución con paleta moderna.
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **React 18**
+- **React 19**
 - **TypeScript**
 - **Vite**
 - **@xyflow/react** (React Flow v12)
-- **Lucide Icons**
+- **Lucide React**
+- **Canvas Confetti**
 - **Vanilla CSS (Glassmorphism & Diseño Moderno)**
 
 ## 💻 Ejecución Local
@@ -45,9 +46,9 @@ Aplicación web interactiva basada en **React Flow** (@xyflow/react) y **Vite** 
    npm run build
    ```
 
-## ☁️ Despliegue en Vercel
+## ☁️ Despliegue
 
-El proyecto incluye la configuración lista en [vercel.json](file:///c:/Users/joaqu/OneDrive/Desktop/MapaS9GTI/vercel.json):
+El proyecto incluye la configuración para plataformas de alojamiento web estático como **Vercel**:
 - **Framework Preset**: Vite
 - **Build Command**: `npm run build`
 - **Output Directory**: `dist`

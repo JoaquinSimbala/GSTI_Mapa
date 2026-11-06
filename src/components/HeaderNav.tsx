@@ -30,10 +30,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
 
   const filterOptions = [
     { id: 'all', label: 'Todo el Mapa', icon: Layers, color: '#4f46e5' },
-    { id: 'valor', label: '1. Arquetipos de Valor', icon: Target, color: '#059669' },
-    { id: 'svs', label: '2. Componentes SVS', icon: Cpu, color: '#2563eb' },
-    { id: 'principios', label: '3. 7 Principios ITIL', icon: Compass, color: '#d97706' },
-    { id: 'practica', label: '4. Casos Prácticos UTP', icon: Award, color: '#7c3aed' }
+    { id: 'generales', label: '1. Prácticas Generales (12)', icon: Layers, color: '#059669' },
+    { id: 'tecnicas', label: '2. Prácticas Técnicas & Despliegue', icon: Cpu, color: '#2563eb' },
+    { id: 'certificacion', label: '3. Certificación ITIL & Estándares', icon: Award, color: '#d97706' },
+    { id: 'practica', label: '4. Casos Prácticos UTP', icon: Target, color: '#7c3aed' }
   ];
 
   const searchResults = Object.values(CONCEPT_DETAILS).filter((item) => {
@@ -43,7 +43,8 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
       item.title.toLowerCase().includes(term) ||
       (item.subtitle && item.subtitle.toLowerCase().includes(term)) ||
       item.shortDesc.toLowerCase().includes(term) ||
-      (item.tags && item.tags.some((t) => t.toLowerCase().includes(term)))
+      (item.tags && item.tags.some((t) => t.toLowerCase().includes(term))) ||
+      (item.standards && item.standards.some((s) => s.toLowerCase().includes(term)))
     );
   });
 
@@ -54,10 +55,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
         <div className="header-brand">
           <div className="header-titles">
             <h1 className="header-title">
-              SISTEMA DE VALOR DEL SERVICIO (SVS) - ITIL 4
+              PRÁCTICAS DE GESTIÓN ITIL & ESQUEMA DE CERTIFICACIÓN
             </h1>
             <p className="header-subtitle">
-              Gestión del Servicio de TI · Semana 11, Sesión 1 (UTP) · Demanda a Valor, Gobernanza y 7 Principios
+              Gestión de Servicios de TI · Semana 13, Sesión 2 (UTP) · Prácticas de Gestión, Certificación PeopleCert & Normas ISO/COBIT
             </p>
           </div>
         </div>
@@ -92,52 +93,61 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
               <Search size={14} color="#64748b" className="search-icon" />
               <input
                 type="text"
-                placeholder="Buscar tema, principio, base de datos..."
+                placeholder="Buscar práctica, certificación, estándar, RAID..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
                 className="search-input"
               />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="search-clear-btn"
+                  title="Limpiar búsqueda"
+                >
+                  ✕
+                </button>
+              )}
             </div>
 
-            {/* Dropdown Results */}
+            {/* Autocomplete Dropdown */}
             {isSearchFocused && searchResults.length > 0 && (
               <div className="search-dropdown">
-                {searchResults.map((item) => (
+                {searchResults.slice(0, 7).map((res) => (
                   <div
-                    key={item.id}
+                    key={res.id}
                     onMouseDown={() => {
-                      onSearchSelect(item.id);
+                      onSearchSelect(res.id);
                       setSearchTerm('');
                     }}
-                    className="hover-search-item search-dropdown-item"
+                    className="search-result-item"
                   >
-                    <div className="search-item-title">{item.title}</div>
-                    <div className="search-item-branch">{item.branchLabel}</div>
+                    <div className="search-result-title">{res.title}</div>
+                    <div className="search-result-badge">{res.branchLabel}</div>
                   </div>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Guided Tour Trigger Button */}
+          {/* Guided Tour Trigger */}
           <button
             onClick={onStartTour}
-            className="action-btn tour-action-btn"
-            title="Iniciar recorrido guiado"
+            className="action-btn tour-btn"
+            title="Recorrido pedagógico guiado"
           >
-            <Compass size={14} />
+            <Compass size={15} />
             <span>Tour Guiado</span>
           </button>
 
           {/* Reset View Button */}
           <button
             onClick={onResetView}
-            className="action-btn reset-action-btn"
-            title="Restablecer vista global"
+            className="action-btn reset-btn"
+            title="Centrar y reajustar lienzo"
           >
-            <RotateCcw size={14} />
+            <RotateCcw size={15} />
             <span>Centrar</span>
           </button>
         </div>

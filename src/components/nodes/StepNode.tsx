@@ -67,7 +67,7 @@ export const StepNode: React.FC<NodeProps> = memo(({ data, selected }) => {
             fontWeight: 600
           }}
         >
-          {nodeData.secondaryInfo || (nodeData.branch === 'principios' ? 'Principio ITIL' : 'Componente')}
+          {nodeData.secondaryInfo || nodeData.badge || 'Práctica / Componente'}
         </span>
       </div>
 
